@@ -22,6 +22,9 @@
 		734A16652574C8EB0003B555 /* ShopListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16642574C8EB0003B555 /* ShopListViewModel.swift */; };
 		734A16682574C8FB0003B555 /* ShopDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16672574C8FB0003B555 /* ShopDetailRouter.swift */; };
 		734A166B2574C9020003B555 /* ShopDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A166A2574C9020003B555 /* ShopDetailViewModel.swift */; };
+		734A16702574DE9D0003B555 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A166F2574DE9D0003B555 /* Shop.swift */; };
+		734A16752574DF010003B555 /* ShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16742574DF010003B555 /* ShopType.swift */; };
+		734A16792574E02E0003B555 /* OfficeHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16782574E02E0003B555 /* OfficeHours.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +45,9 @@
 		734A16642574C8EB0003B555 /* ShopListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewModel.swift; sourceTree = "<group>"; };
 		734A16672574C8FB0003B555 /* ShopDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailRouter.swift; sourceTree = "<group>"; };
 		734A166A2574C9020003B555 /* ShopDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModel.swift; sourceTree = "<group>"; };
+		734A166F2574DE9D0003B555 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
+		734A16742574DF010003B555 /* ShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopType.swift; sourceTree = "<group>"; };
+		734A16782574E02E0003B555 /* OfficeHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeHours.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,7 @@
 		734A162C2574AD670003B555 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				734A166D2574DE710003B555 /* Common */,
 				734A164A2574BD830003B555 /* Routing */,
 				734A16462574B6EE0003B555 /* Application */,
 				734A16422574B6530003B555 /* Scenes */,
@@ -214,6 +221,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		734A166D2574DE710003B555 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				734A166E2574DE790003B555 /* Classes */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		734A166E2574DE790003B555 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				734A16772574E0170003B555 /* Shop */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		734A16772574E0170003B555 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				734A16742574DF010003B555 /* ShopType.swift */,
+				734A166F2574DE9D0003B555 /* Shop.swift */,
+				734A16782574E02E0003B555 /* OfficeHours.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -287,11 +320,14 @@
 				734A16652574C8EB0003B555 /* ShopListViewModel.swift in Sources */,
 				734A16322574AD670003B555 /* ViewController.swift in Sources */,
 				734A16682574C8FB0003B555 /* ShopDetailRouter.swift in Sources */,
+				734A16792574E02E0003B555 /* OfficeHours.swift in Sources */,
 				734A16522574C4DB0003B555 /* OperatingTimeViewController.swift in Sources */,
 				734A162E2574AD670003B555 /* AppDelegate.swift in Sources */,
 				734A16592574C5180003B555 /* OperatingTimeViewModel.swift in Sources */,
 				734A165F2574C85C0003B555 /* ShopListViewController.swift in Sources */,
+				734A16752574DF010003B555 /* ShopType.swift in Sources */,
 				734A165C2574C8200003B555 /* ShopDetailViewController.swift in Sources */,
+				734A16702574DE9D0003B555 /* Shop.swift in Sources */,
 				734A16302574AD670003B555 /* SceneDelegate.swift in Sources */,
 				734A166B2574C9020003B555 /* ShopDetailViewModel.swift in Sources */,
 				734A16622574C8DD0003B555 /* ShopListRouter.swift in Sources */,
