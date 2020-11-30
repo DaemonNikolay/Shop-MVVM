@@ -8,6 +8,7 @@
 import Foundation
 
 class Shop {
+	let id: UUID
 	var type: ShopType
 	var employeesNumber: UInt
 	var openingDate: Date
@@ -20,6 +21,7 @@ class Shop {
 		 name: String,
 		 officeHours: OfficeHours) {
 		
+		self.id = UUID()
 		self.type = type
 		self.employeesNumber = employeesNumber
 		self.openingDate = openingDate
