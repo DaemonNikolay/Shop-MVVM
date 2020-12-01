@@ -32,7 +32,8 @@ struct DataSource {
 	}
 	
 	func addShop(shop: Shop) {
-		self.dataSource.setValue(shop, forKey: shop.id.description)
+		try? self.dataSource.setObject(shop, forKey: shop.id.description)
+		
 		self.updateShopIds(id: shop.id.description)
 	}
 	
@@ -49,7 +50,7 @@ struct DataSource {
 	}
 	
 	func shop(id: String) -> Shop? {
-		guard let shop = self.dataSource.object(forKey: id) as? Shop else {
+		guard let shop = try? dataSource.getObject(forKey: id, castTo: Shop.self) else {
 			return nil
 		}
 		
@@ -77,9 +78,14 @@ struct DataSource {
 	}
 	
 	private func updateShopIds(id: String) {
-		var shopIds = self.getShopIds()
-		shopIds?.append(id)
+		guard var shopIds = self.getShopIds() else {
+			let shopIds = [id]
+			self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+			
+			return
+		}
 		
+		shopIds.append(id)
 		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
 	}
 }

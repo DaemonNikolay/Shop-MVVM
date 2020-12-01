@@ -6,12 +6,17 @@
 //
 
 import Foundation
+import os.log
 
-struct OfficeHours {
-	private var _opening: UInt
+struct OfficeHours: Codable {
+	private var _opening: UInt = .min
 	var opening: UInt {
 		set {
-			if newValue > 24 || newValue >= self.closing {
+			if newValue > 24 {
+				os_log("The opening time must be in the range from 0 to 24 and more closing time.",
+					   log: .default,
+					   type: .fault)
+				
 				return
 			}
 			
@@ -21,10 +26,14 @@ struct OfficeHours {
 		get { self._opening }
 	}
 	
-	private var _closing: UInt
+	private var _closing: UInt = .min
 	var closing: UInt {
 		set {
-			if newValue > 24 || newValue <= self.opening {
+			if newValue > 24 {
+				os_log("The closing time must be in the range from 0 to 24 and more opening time.",
+					   log: .default,
+					   type: .fault)
+				
 				return
 			}
 			
@@ -34,5 +43,8 @@ struct OfficeHours {
 		get { self._closing }
 	}
 	
-	
+	init(opening: UInt, closing: UInt) {
+		self.opening = opening
+		self.closing = closing
+	}
 }
