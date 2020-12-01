@@ -8,7 +8,7 @@
 import Foundation
 
 struct DataSource {
-	private let keyShop: String = "shop"
+	private let keyShopIds: String = "shops"
 	
 	static var shared: DataSource {
 		let dataSource = DataSource()
@@ -16,47 +16,70 @@ struct DataSource {
 		return dataSource
 	}
 	
+	private let dataSource: UserDefaults
+	
 	private init() {
-		
+		self.dataSource = UserDefaults.standard
 	}
+	
 	
 	var shopCount: Int {
 		get {
-			let userDefaults = UserDefaults.standard
-			let shops = userDefaults.array(forKey: self.keyShop)
+			let shopIds = self.getShopIds()
 			
-			return shops?.count ?? 0
+			return shopIds?.count ?? 0
 		}
 	}
 	
 	func addShop(shop: Shop) {
-		let userDefaults = UserDefaults.standard
-		
-		guard var oldShops = userDefaults.array(forKey: self.keyShop) as? [Shop] else {
-			userDefaults.setValue([shop], forKey: self.keyShop)
-			
-			return
-		}
-		
-		oldShops.append(shop)
+		self.dataSource.setValue(shop, forKey: shop.id.description)
+		self.updateShopIds(id: shop.id.description)
 	}
 	
 	func shops() -> Array<Shop>? {
-		let userDefaults = UserDefaults.standard
-		let shops: Array<Shop>? = userDefaults.array(forKey: self.keyShop) as? Array<Shop>
+		guard let shopIds: Array<String> = self.getShopIds() else {
+			return nil
+		}
+
+		let shops: Array<Shop> = shopIds.map { shopId in
+			self.shop(id: shopId)!
+		}
 			
 		return shops
 	}
 	
-	func shop(id: UUID) -> Shop? {
-		guard let shops = self.shops() else {
+	func shop(id: String) -> Shop? {
+		guard let shop = self.dataSource.object(forKey: id) as? Shop else {
 			return nil
 		}
 		
-		if let shop = shops.first(where: { $0.id == id }) {
-			return shop
+		return shop
+	}
+	
+	func updateShop(id: UUID, newShop: Shop) -> Bool {
+		guard let _ = self.shop(id: id.description) else {
+			return false
 		}
 		
-		return nil
+		if newShop.id != id {
+			self.dataSource.setValue(newShop, forKey: id.description)
+			return true
+		}
+
+		return false
+	}
+	
+	private func getShopIds() -> Array<String>? {
+		let userDefaults = UserDefaults.standard
+		let shopIds = userDefaults.array(forKey: self.keyShopIds) as? Array<String>
+		
+		return shopIds
+	}
+	
+	private func updateShopIds(id: String) {
+		var shopIds = self.getShopIds()
+		shopIds?.append(id)
+		
+		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
 	}
 }
