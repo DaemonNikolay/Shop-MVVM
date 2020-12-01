@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Fakery
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,27 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	private func autoFillDB() {
-		let dataSource = DataSource.shared
-		let shops = dataSource.shops()
-		if dataSource.shopCount > 0 {
-			return
-		}
-		
-		let faker = Faker(locale: "en")
-		
-		let shopTypes = ShopType.allCases
-		for i in 0...shopTypes.count-1 {
-			for _ in 0...4 {
-				let officeHours = OfficeHours(opening: 8, closing: 20)
-				let shop: Shop = Shop(type: shopTypes[i],
-									  employeesNumber: UInt(faker.number.randomInt(min: 1, max: 9999)),
-									  openingDate: faker.date.forward(99999),
-									  name: faker.company.name(),
-									  officeHours: officeHours)
-				
-				dataSource.addShop(shop: shop)
-			}
-		}
+		AutoFillDB.autoFillDBFrom(4)
 	}
 }
 
