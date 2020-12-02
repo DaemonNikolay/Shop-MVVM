@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		04363565252D47109E247692 /* Pods_Shop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */; };
+		7346989125774ECF00B55191 /* ShopListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989025774ECF00B55191 /* ShopListModule.swift */; };
+		73469895257757AA00B55191 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73469894257757AA00B55191 /* Animator.swift */; };
+		7346989B257757CA00B55191 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989A257757CA00B55191 /* Transition.swift */; };
+		7346989F257757E700B55191 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989E257757E700B55191 /* Router.swift */; };
+		734698A3257758AE00B55191 /* PushTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698A2257758AE00B55191 /* PushTransition.swift */; };
+		734698A62577590A00B55191 /* WindowNavigationTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698A52577590A00B55191 /* WindowNavigationTransition.swift */; };
+		734698A92577597400B55191 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698A82577597400B55191 /* AppRouter.swift */; };
+		734698AD257759D700B55191 /* ShopListRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698AC257759D700B55191 /* ShopListRoute.swift */; };
+		734698B025775BB700B55191 /* ShopDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698AF25775BB700B55191 /* ShopDetailRoute.swift */; };
 		734A162E2574AD670003B555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A162D2574AD670003B555 /* AppDelegate.swift */; };
 		734A16302574AD670003B555 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A162F2574AD670003B555 /* SceneDelegate.swift */; };
 		734A16322574AD670003B555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16312574AD670003B555 /* ViewController.swift */; };
@@ -36,6 +45,15 @@
 		24E10DB1D84DE05E6707FF2F /* Pods-Shop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.debug.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.debug.xcconfig"; sourceTree = "<group>"; };
 		4F22F63DED7EF5E069A5C4DE /* Pods-Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.release.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.release.xcconfig"; sourceTree = "<group>"; };
 		5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7346989025774ECF00B55191 /* ShopListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModule.swift; sourceTree = "<group>"; };
+		73469894257757AA00B55191 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		7346989A257757CA00B55191 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
+		7346989E257757E700B55191 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		734698A2257758AE00B55191 /* PushTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTransition.swift; sourceTree = "<group>"; };
+		734698A52577590A00B55191 /* WindowNavigationTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowNavigationTransition.swift; sourceTree = "<group>"; };
+		734698A82577597400B55191 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		734698AC257759D700B55191 /* ShopListRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListRoute.swift; sourceTree = "<group>"; };
+		734698AF25775BB700B55191 /* ShopDetailRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailRoute.swift; sourceTree = "<group>"; };
 		734A162A2574AD670003B555 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		734A162D2574AD670003B555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		734A162F2574AD670003B555 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +98,36 @@
 				5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		734698932577579C00B55191 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				734698AB257759BE00B55191 /* Routes */,
+				734698A12577589D00B55191 /* Transitions */,
+				73469894257757AA00B55191 /* Animator.swift */,
+				7346989A257757CA00B55191 /* Transition.swift */,
+				7346989E257757E700B55191 /* Router.swift */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		734698A12577589D00B55191 /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				734698A2257758AE00B55191 /* PushTransition.swift */,
+				734698A52577590A00B55191 /* WindowNavigationTransition.swift */,
+			);
+			path = Transitions;
+			sourceTree = "<group>";
+		};
+		734698AB257759BE00B55191 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				734698AC257759D700B55191 /* ShopListRoute.swift */,
+				734698AF25775BB700B55191 /* ShopDetailRoute.swift */,
+			);
+			path = Routes;
 			sourceTree = "<group>";
 		};
 		734A16212574AD670003B555 = {
@@ -130,6 +178,7 @@
 		734A16432574B6710003B555 /* ShopList */ = {
 			isa = PBXGroup;
 			children = (
+				7346989025774ECF00B55191 /* ShopListModule.swift */,
 				734A164E2574BDB30003B555 /* ViewModel */,
 				734A164D2574BD9D0003B555 /* Router */,
 				734A16472574BD4A0003B555 /* View */,
@@ -161,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				734A162D2574AD670003B555 /* AppDelegate.swift */,
+				734698A82577597400B55191 /* AppRouter.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -247,6 +297,7 @@
 		734A166D2574DE710003B555 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				734698932577579C00B55191 /* Routing */,
 				735FE3F525760F8600C6E984 /* Protocols */,
 				73A02FE4257603D40038EC60 /* Extensions */,
 				7370C6D42574E5B00008E85A /* Helper */,
@@ -447,11 +498,20 @@
 				735FE3F325760F5C00C6E984 /* UserDefaults.swift in Sources */,
 				7370C6D72574E5E40008E85A /* DataSource.swift in Sources */,
 				734A16592574C5180003B555 /* OperatingTimeViewModel.swift in Sources */,
+				734698A92577597400B55191 /* AppRouter.swift in Sources */,
+				734698A3257758AE00B55191 /* PushTransition.swift in Sources */,
 				734A165F2574C85C0003B555 /* ShopListViewController.swift in Sources */,
+				734698A62577590A00B55191 /* WindowNavigationTransition.swift in Sources */,
 				734A16752574DF010003B555 /* ShopType.swift in Sources */,
+				734698AD257759D700B55191 /* ShopListRoute.swift in Sources */,
+				734698B025775BB700B55191 /* ShopDetailRoute.swift in Sources */,
+				73469895257757AA00B55191 /* Animator.swift in Sources */,
 				735FE3FC2576192B00C6E984 /* AutoFillDB.swift in Sources */,
 				734A165C2574C8200003B555 /* ShopDetailViewController.swift in Sources */,
 				734A16702574DE9D0003B555 /* Shop.swift in Sources */,
+				7346989F257757E700B55191 /* Router.swift in Sources */,
+				7346989B257757CA00B55191 /* Transition.swift in Sources */,
+				7346989125774ECF00B55191 /* ShopListModule.swift in Sources */,
 				734A16302574AD670003B555 /* SceneDelegate.swift in Sources */,
 				734A166B2574C9020003B555 /* ShopDetailViewModel.swift in Sources */,
 				734A16622574C8DD0003B555 /* ShopListRouter.swift in Sources */,

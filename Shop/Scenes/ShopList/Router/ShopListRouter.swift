@@ -7,6 +7,6 @@
 
 import Foundation
 
-final class ShopListRouter {
+final class ShopListRouter: Router<ShopListViewController> {
 	
 }
