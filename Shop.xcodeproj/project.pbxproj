@@ -152,7 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				734A166D2574DE710003B555 /* Common */,
-				734A164A2574BD830003B555 /* Routing */,
 				734A16462574B6EE0003B555 /* Application */,
 				734A16422574B6530003B555 /* Scenes */,
 				734A162F2574AD670003B555 /* SceneDelegate.swift */,
@@ -237,13 +236,6 @@
 				734A16512574C4DB0003B555 /* OperatingTimeViewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		734A164A2574BD830003B555 /* Routing */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Routing;
 			sourceTree = "<group>";
 		};
 		734A164B2574BD920003B555 /* Router */ = {

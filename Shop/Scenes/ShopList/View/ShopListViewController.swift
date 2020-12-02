@@ -11,7 +11,7 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	@IBOutlet weak var tableShops: UITableView!
 	
-	private var viewModel: ShopListViewModel?
+	private var viewModel: ShopListViewModel
 	private let cellReuseIdentifier: String = "myCell"
 	
 	
@@ -37,17 +37,17 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		self.viewModel?.shops.count ?? 0
+		self.viewModel.shops.count
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		let key: String = self.keyOfShopOffsetBy(section)
 		
-		return self.viewModel?.shops[key]?.count ?? 0
+		return self.viewModel.shops[key]?.count ?? 0
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let keysCount = self.viewModel?.shops.keys.count ?? 0
+		let keysCount = self.viewModel.shops.keys.count
 		if section < keysCount  {
 			return self.keyOfShopOffsetBy(section)
 		}
@@ -59,7 +59,7 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 		let cell: UITableViewCell = self.tableShops.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier, for: indexPath)
 		
 		let key = self.keyOfShopOffsetBy(indexPath.section)
-		guard let shops = self.viewModel?.shops[key] else {
+		guard let shops = self.viewModel.shops[key] else {
 			cell.textLabel?.text = "-"
 			
 			return cell
@@ -71,9 +71,7 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
-		guard var viewModel = self.viewModel else {
-			return "-"
-		}
+		var viewModel = self.viewModel
 		
 		let startIndex = viewModel.shops.startIndex
 		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)
