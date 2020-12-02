@@ -157,6 +157,9 @@
                                                 <rect key="frame" x="20" y="7" width="92" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Save"/>
+                                                <connections>
+                                                    <action selector="saveClick:" destination="jU5-qD-9j5" eventType="touchUpInside" id="AHP-eS-JbY"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="plain" id="zBp-PI-W3h">
@@ -164,6 +167,9 @@
                                                 <rect key="frame" x="302" y="7" width="92" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editClick:" destination="jU5-qD-9j5" eventType="touchUpInside" id="BI3-uC-Xkr"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -198,6 +204,11 @@
                             <constraint firstItem="LVx-FZ-vBR" firstAttribute="top" secondItem="YYZ-NM-PFM" secondAttribute="bottom" constant="21" id="yKm-Yx-gzO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="editButton" destination="QWJ-RZ-iHS" id="wgb-wj-eF4"/>
+                        <outlet property="saveButton" destination="laY-Q1-hoz" id="yvh-U6-d15"/>
+                        <outlet property="shopSettings" destination="LVx-FZ-vBR" id="BzK-Un-rMX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ucU-G5-4kQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
