@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopListViewController" customModule="Shop" customModuleProvider="target">
             <connections>
+                <outlet property="tableShops" destination="isg-hK-NI4" id="ojy-hc-yzN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="pZj-bj-Oet"/>
             </connections>
         </placeholder>
@@ -18,16 +19,18 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-cX-gVo">
-                    <rect key="frame" x="184" y="395" width="46" height="30"/>
-                    <state key="normal" title="Button"/>
-                </button>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="isg-hK-NI4">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="ta1-cX-gVo" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="351" id="GhI-of-MUp"/>
-                <constraint firstItem="ta1-cX-gVo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="w0i-Sb-Fvw"/>
+                <constraint firstItem="isg-hK-NI4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="FlD-Pk-dCg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="isg-hK-NI4" secondAttribute="trailing" id="Ilz-jt-9KP"/>
+                <constraint firstItem="isg-hK-NI4" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="rVq-x3-wlC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="isg-hK-NI4" secondAttribute="bottom" id="tWv-Hi-UaK"/>
             </constraints>
             <point key="canvasLocation" x="69.565217391304358" y="107.8125"/>
         </view>
