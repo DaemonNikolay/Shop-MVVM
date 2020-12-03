@@ -21,7 +21,7 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		fatalError("unable to use init with coder")
+		fatalError("Unable to use init with coder")
 	}
 	
 	override func viewDidLoad() {
@@ -65,8 +65,18 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 		return cell
 	}
 	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else {
+			return
+		}
+		
+		let key = self.keyOfShopOffsetBy(indexPath.section)
+		
+		self.viewModel.showShopDetail(shopName: name, shopType: key)
+	}
+	
 	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
-		var viewModel = self.viewModel
+		let viewModel = self.viewModel
 		
 		let startIndex = viewModel.shops.startIndex
 		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)

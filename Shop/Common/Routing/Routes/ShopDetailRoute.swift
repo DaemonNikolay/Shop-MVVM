@@ -8,14 +8,14 @@
 import Foundation
 
 protocol ShopDetailRoute {
-	func showShopList()
+	func showShopDetail()
 }
 
-extension ShopListRoute where Self: RouterProtocol {
+extension ShopDetailRoute where Self: RouterProtocol {
 	func showShopDetail() {
-//		let module = ShopDetailModule()
-//		let transition = WindowNavigationTransition()
-//		
-//		open(module.view, transition: transition)
+		let transition = WindowNavigationTransition()
+		let module = ShopDetailModule(transition: transition)
+		
+		open(module.view, transition: transition)
 	}
 }

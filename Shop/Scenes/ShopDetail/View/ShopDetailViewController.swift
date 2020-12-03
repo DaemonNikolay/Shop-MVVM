@@ -8,6 +8,20 @@
 import UIKit
 
 class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+	
+	private var viewModel: ShopDetailViewModel
+	
+	init(container: Container) {
+		self.viewModel = container.viewModel
+		
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("Unable to use init with coder")
+	}
+	
+	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		0
 	}
@@ -29,15 +43,9 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		self.setupTable()
 	}
 	
-	private func setupTable() {
-		self.shopSettings.delegate = self
-		self.shopSettings.dataSource = self
-	}
-	
+	@IBOutlet weak var settingsTable: UITableView!
 	
 }
 

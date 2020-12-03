@@ -11,43 +11,53 @@ struct ShopListViewModel {
 	private let router: ShopListRouter
 	
 	typealias ShopData = [String: [Shop]]
-	private var _shops: ShopData = [:]
-	var shops: ShopData {
-		set {
-			self._shops = newValue
-		}
-		mutating get {
-			if self._shops.isEmpty {
-				self.shopsUpdate()
-			}
-			
-			return self._shops
-		}
-	}
+	
+	var shops: ShopData = [:]
 	
 	init(container: Container) {
 		self.router = container.router
-		
-		self.shopsUpdate()
+		self.shops = self.shopsInit()
 	}
 	
 	
-	mutating func shopsUpdate() {
+	func shopsInit() -> ShopData {
 		let dataSource = DataSource.shared
-
 		guard let shops = dataSource.shops() else {
+			return [:]
+		}
+		
+		var result: ShopData = [:]
+		
+		ShopType.allCases.forEach { shopType in
+			result[shopType.rawValue] = []
+		}
+		
+		shops.forEach { shop in
+			let key: String = shop.type.rawValue
+			result[key]?.append(shop)
+		}
+		
+		return result
+	}
+	
+	func shop(name: String, key: String) -> Shop? {
+		let shop = self.shops[key]?.first(where: { $0.name == name })
+		
+		return shop
+	}
+	
+	func showShopDetail(shopName: String, shopType: String) {
+		guard let shop = self.shop(name: shopName, key: shopType) else {
 			return
 		}
 		
-		var result = ShopType.AllCases().map { shopType -> ShopData in
-			[shopType.rawValue: []]
-		}
+		print(shop.id)
 		
-		print(result)
-		
-		shops.forEach { shop in
-			
-		}
+		self.transitionToShopDetail()
+	}
+	
+	private func transitionToShopDetail() {
+		self.router.showShopDetail()
 	}
 }
 

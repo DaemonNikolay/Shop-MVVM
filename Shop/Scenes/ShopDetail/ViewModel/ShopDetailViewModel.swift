@@ -8,5 +8,15 @@
 import Foundation
 
 struct ShopDetailViewModel {
+	private let router: ShopDetailRouter
 	
+	init(container: Container) {
+		self.router = container.router
+	}
+}
+
+extension ShopDetailViewModel {
+	struct Container {
+		let router: ShopDetailRouter
+	}
 }
