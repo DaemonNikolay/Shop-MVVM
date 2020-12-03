@@ -51,10 +51,18 @@ struct ShopListViewModel {
 			return
 		}
 		
-		var dataSource = DataSource.shared
+		let dataSource = DataSource.shared
 		dataSource.currentShop = shop
 		
-		self.transitionToShopDetail()
+		if !shop.isNearestShop {
+			self.transitionToShopDetail()
+		} else {
+			self.transitionToShopOperatingTime()
+		}
+	}
+	
+	private func transitionToShopOperatingTime() {
+		self.router.showOperatingTime()
 	}
 	
 	private func transitionToShopDetail() {

@@ -15,12 +15,14 @@ class Shop: Codable {
 	var openingDate: Date
 	var name: String
 	var officeHours: OfficeHours
+	var isNearestShop: Bool
 
 	init(type: ShopType,
 		 employeesNumber: UInt,
 		 openingDate: Date,
 		 name: String,
-		 officeHours: OfficeHours) {
+		 officeHours: OfficeHours,
+		 isNearestShop: Bool) {
 		
 		self.id = UUID()
 		self.type = type
@@ -28,6 +30,7 @@ class Shop: Codable {
 		self.openingDate = openingDate
 		self.name = name
 		self.officeHours = officeHours
+		self.isNearestShop = isNearestShop
 	}
 	
 	private enum CodingKeys: String, CodingKey {
@@ -37,6 +40,7 @@ class Shop: Codable {
 		case openingDate
 		case name
 		case officeHours
+		case isNearestShop
 	}
 	
 	required init(from decoder: Decoder) throws {
@@ -48,6 +52,7 @@ class Shop: Codable {
 		self.openingDate = try values.decode(Date.self, forKey: .openingDate)
 		self.name = try values.decode(String.self, forKey: .name)
 		self.officeHours = try values.decode(OfficeHours.self, forKey: .officeHours)
+		self.isNearestShop = try values.decode(Bool.self, forKey: .isNearestShop)
 	}
 	
 	func encode(to encoder: Encoder) throws {
@@ -59,6 +64,7 @@ class Shop: Codable {
 		try container.encode(self.openingDate, forKey: .openingDate)
 		try container.encode(self.name, forKey: .name)
 		try container.encode(self.officeHours, forKey: .officeHours)
+		try container.encode(self.isNearestShop, forKey: .isNearestShop)
 	}
 }
 
