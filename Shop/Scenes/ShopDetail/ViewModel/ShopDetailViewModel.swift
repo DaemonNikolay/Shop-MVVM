@@ -48,6 +48,10 @@ struct ShopDetailViewModel {
 		
 		return "\(key?.rawValue ?? "-"): \(value)"
 	}
+	
+	func showOperatingTime() {
+		self.router.showOperatingTime()
+	}
 }
 
 extension ShopDetailViewModel {

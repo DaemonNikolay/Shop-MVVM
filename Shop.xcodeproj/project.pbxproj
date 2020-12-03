@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		04363565252D47109E247692 /* Pods_Shop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */; };
 		73253A9B2578E1CA004D942C /* OperatingTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */; };
+		73253A9E2578EBD6004D942C /* OperatingTimeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73253A9D2578EBD6004D942C /* OperatingTimeRoute.swift */; };
+		73253AA12578EC52004D942C /* OperatingTimeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73253AA02578EC52004D942C /* OperatingTimeModule.swift */; };
 		7346989125774ECF00B55191 /* ShopListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989025774ECF00B55191 /* ShopListModule.swift */; };
 		73469895257757AA00B55191 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73469894257757AA00B55191 /* Animator.swift */; };
 		7346989B257757CA00B55191 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989A257757CA00B55191 /* Transition.swift */; };
@@ -47,6 +49,8 @@
 		4F22F63DED7EF5E069A5C4DE /* Pods-Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.release.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.release.xcconfig"; sourceTree = "<group>"; };
 		5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OperatingTimeViewController.xib; sourceTree = "<group>"; };
+		73253A9D2578EBD6004D942C /* OperatingTimeRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeRoute.swift; sourceTree = "<group>"; };
+		73253AA02578EC52004D942C /* OperatingTimeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeModule.swift; sourceTree = "<group>"; };
 		7346989025774ECF00B55191 /* ShopListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModule.swift; sourceTree = "<group>"; };
 		73469894257757AA00B55191 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		7346989A257757CA00B55191 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			children = (
 				734698AC257759D700B55191 /* ShopListRoute.swift */,
 				734698AF25775BB700B55191 /* ShopDetailRoute.swift */,
+				73253A9D2578EBD6004D942C /* OperatingTimeRoute.swift */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 		734A16452574B6AD0003B555 /* OperatingTime */ = {
 			isa = PBXGroup;
 			children = (
+				73253AA02578EC52004D942C /* OperatingTimeModule.swift */,
 				734A16502574BDC00003B555 /* ViewModel */,
 				734A164B2574BD920003B555 /* Router */,
 				734A16492574BD530003B555 /* View */,
@@ -486,11 +492,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				734A16652574C8EB0003B555 /* ShopListViewModel.swift in Sources */,
+				73253AA12578EC52004D942C /* OperatingTimeModule.swift in Sources */,
 				734A16682574C8FB0003B555 /* ShopDetailRouter.swift in Sources */,
 				734A16792574E02E0003B555 /* OfficeHours.swift in Sources */,
 				735FE3F725760F9600C6E984 /* ObjectSavable.swift in Sources */,
 				734A16522574C4DB0003B555 /* OperatingTimeViewController.swift in Sources */,
 				734A162E2574AD670003B555 /* AppDelegate.swift in Sources */,
+				73253A9E2578EBD6004D942C /* OperatingTimeRoute.swift in Sources */,
 				735FE3F325760F5C00C6E984 /* UserDefaults.swift in Sources */,
 				7370C6D72574E5E40008E85A /* DataSource.swift in Sources */,
 				734A16592574C5180003B555 /* OperatingTimeViewModel.swift in Sources */,

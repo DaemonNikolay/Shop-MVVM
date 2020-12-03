@@ -30,8 +30,9 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="UBA-lM-pd8">
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="UBA-lM-pd8">
                             <rect key="frame" x="8" y="37" width="358" height="216"/>
+                            <locale key="locale" localeIdentifier="ru"/>
                             <connections>
                                 <action selector="openingTimeChanged:" destination="-1" eventType="valueChanged" id="BnY-xz-hNc"/>
                             </connections>
@@ -42,12 +43,13 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="riB-tb-uAQ">
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="riB-tb-uAQ">
                             <rect key="frame" x="8" y="316" width="358" height="162"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="162" id="DFa-7I-p99"/>
                                 <constraint firstAttribute="width" constant="358" id="Vyp-uq-47M"/>
                             </constraints>
+                            <locale key="locale" localeIdentifier="ru"/>
                             <connections>
                                 <action selector="closingTimeChanged:" destination="-1" eventType="valueChanged" id="S8H-VZ-0Uh"/>
                             </connections>
@@ -80,6 +82,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Save">
                                         <color key="titleColor" name="AccentColor"/>
+                                        <color key="titleShadowColor" name="AccentColor"/>
                                     </state>
                                     <connections>
                                         <action selector="saveClick:" destination="-1" eventType="touchUpInside" id="i89-AG-dJH"/>

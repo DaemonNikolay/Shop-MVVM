@@ -68,7 +68,7 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 			print("-")
 			
 		case .officeHours:
-			print("-")
+			self.viewModel.showOperatingTime()
 			
 		case .openingDate:
 			print("-")
