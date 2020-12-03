@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct DataSource {
+class DataSource {
 	private let keyShopIds: String = "shops"
 	
-	static var shared: DataSource {
+	static var shared: DataSource = {
 		let dataSource = DataSource()
 		
 		return dataSource
-	}
+	}()
 	
 	private let dataSource: UserDefaults
 	
@@ -22,6 +22,7 @@ struct DataSource {
 		self.dataSource = UserDefaults.standard
 	}
 	
+	var currentShop: Shop?
 	
 	var shopCount: Int {
 		get {
@@ -87,5 +88,11 @@ struct DataSource {
 		
 		shopIds.append(id)
 		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+	}
+}
+
+extension DataSource: NSCopying {
+	func copy(with zone: NSZone? = nil) -> Any {
+		return self
 	}
 }
