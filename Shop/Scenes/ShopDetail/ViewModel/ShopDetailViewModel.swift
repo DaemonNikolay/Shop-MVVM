@@ -52,6 +52,10 @@ struct ShopDetailViewModel {
 	func showOperatingTime() {
 		self.router.showOperatingTime()
 	}
+	
+	func showShopList() {
+		self.router.showShopList()
+	}
 }
 
 extension ShopDetailViewModel {

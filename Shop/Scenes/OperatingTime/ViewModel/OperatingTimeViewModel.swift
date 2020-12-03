@@ -13,6 +13,10 @@ struct OperatingTimeViewModel {
 	init(container: Container) {
 		self.router = container.router
 	}
+	
+	func showShopList() {
+		self.router.showShopList()
+	}
 }
 
 extension OperatingTimeViewModel {

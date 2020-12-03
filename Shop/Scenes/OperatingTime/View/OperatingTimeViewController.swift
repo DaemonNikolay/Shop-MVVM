@@ -36,7 +36,7 @@ class OperatingTimeViewController: UIViewController {
 	}
 	
 	@IBAction func saveClick(_ sender: UIButton) {
-		print("click")
+		self.viewModel.showShopList()
 	}
 }
 
