@@ -72,6 +72,7 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 			
 		case .openingDate:
 			print("-")
+			
 		default:
 			print("-")
 		}

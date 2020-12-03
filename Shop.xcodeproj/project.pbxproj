@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04363565252D47109E247692 /* Pods_Shop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */; };
+		73253A9B2578E1CA004D942C /* OperatingTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */; };
 		7346989125774ECF00B55191 /* ShopListModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989025774ECF00B55191 /* ShopListModule.swift */; };
 		73469895257757AA00B55191 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73469894257757AA00B55191 /* Animator.swift */; };
 		7346989B257757CA00B55191 /* Transition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7346989A257757CA00B55191 /* Transition.swift */; };
@@ -45,6 +46,7 @@
 		24E10DB1D84DE05E6707FF2F /* Pods-Shop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.debug.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.debug.xcconfig"; sourceTree = "<group>"; };
 		4F22F63DED7EF5E069A5C4DE /* Pods-Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.release.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.release.xcconfig"; sourceTree = "<group>"; };
 		5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OperatingTimeViewController.xib; sourceTree = "<group>"; };
 		7346989025774ECF00B55191 /* ShopListModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListModule.swift; sourceTree = "<group>"; };
 		73469894257757AA00B55191 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		7346989A257757CA00B55191 /* Transition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transition.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				734A16512574C4DB0003B555 /* OperatingTimeViewController.swift */,
+				73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73253A9B2578E1CA004D942C /* OperatingTimeViewController.xib in Resources */,
 				734A163A2574AD680003B555 /* LaunchScreen.storyboard in Resources */,
 				73BEA2F42578B37C00A42B68 /* ShopDetailViewController.xib in Resources */,
 				734A16372574AD680003B555 /* Assets.xcassets in Resources */,
