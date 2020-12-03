@@ -29,11 +29,6 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		self.tableShops.register(UITableViewCell.self,
 								 forCellReuseIdentifier: self.cellReuseIdentifier)
-
-		self.tableShops.delegate = self
-		self.tableShops.dataSource = self
-		
-		
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
