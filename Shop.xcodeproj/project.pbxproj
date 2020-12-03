@@ -19,8 +19,6 @@
 		734698B025775BB700B55191 /* ShopDetailRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734698AF25775BB700B55191 /* ShopDetailRoute.swift */; };
 		734698F22577A1C400B55191 /* ShopListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 734698F12577A1C400B55191 /* ShopListViewController.xib */; };
 		734A162E2574AD670003B555 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A162D2574AD670003B555 /* AppDelegate.swift */; };
-		734A16302574AD670003B555 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A162F2574AD670003B555 /* SceneDelegate.swift */; };
-		734A16322574AD670003B555 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16312574AD670003B555 /* ViewController.swift */; };
 		734A16372574AD680003B555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 734A16362574AD680003B555 /* Assets.xcassets */; };
 		734A163A2574AD680003B555 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 734A16382574AD680003B555 /* LaunchScreen.storyboard */; };
 		734A16522574C4DB0003B555 /* OperatingTimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16512574C4DB0003B555 /* OperatingTimeViewController.swift */; };
@@ -57,8 +55,6 @@
 		734698F12577A1C400B55191 /* ShopListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopListViewController.xib; sourceTree = "<group>"; };
 		734A162A2574AD670003B555 /* Shop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		734A162D2574AD670003B555 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		734A162F2574AD670003B555 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		734A16312574AD670003B555 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		734A16362574AD680003B555 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		734A16392574AD680003B555 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		734A163B2574AD680003B555 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -154,8 +150,6 @@
 				734A166D2574DE710003B555 /* Common */,
 				734A16462574B6EE0003B555 /* Application */,
 				734A16422574B6530003B555 /* Scenes */,
-				734A162F2574AD670003B555 /* SceneDelegate.swift */,
-				734A16312574AD670003B555 /* ViewController.swift */,
 				734A16362574AD680003B555 /* Assets.xcassets */,
 				734A16382574AD680003B555 /* LaunchScreen.storyboard */,
 				734A163B2574AD680003B555 /* Info.plist */,
@@ -481,7 +475,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				734A16652574C8EB0003B555 /* ShopListViewModel.swift in Sources */,
-				734A16322574AD670003B555 /* ViewController.swift in Sources */,
 				734A16682574C8FB0003B555 /* ShopDetailRouter.swift in Sources */,
 				734A16792574E02E0003B555 /* OfficeHours.swift in Sources */,
 				735FE3F725760F9600C6E984 /* ObjectSavable.swift in Sources */,
@@ -504,7 +497,6 @@
 				7346989F257757E700B55191 /* Router.swift in Sources */,
 				7346989B257757CA00B55191 /* Transition.swift in Sources */,
 				7346989125774ECF00B55191 /* ShopListModule.swift in Sources */,
-				734A16302574AD670003B555 /* SceneDelegate.swift in Sources */,
 				734A166B2574C9020003B555 /* ShopDetailViewModel.swift in Sources */,
 				734A16622574C8DD0003B555 /* ShopListRouter.swift in Sources */,
 				734A16562574C4FE0003B555 /* OperatingTimeRouter.swift in Sources */,
@@ -648,16 +640,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T9U8T2S4YQ;
+				DEVELOPMENT_TEAM = NCC674B9Y5;
 				INFOPLIST_FILE = Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nikulux.Shop;
+				PRODUCT_BUNDLE_IDENTIFIER = nikulux.Shop1234;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -668,16 +660,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T9U8T2S4YQ;
+				DEVELOPMENT_TEAM = NCC674B9Y5;
 				INFOPLIST_FILE = Shop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = nikulux.Shop;
+				PRODUCT_BUNDLE_IDENTIFIER = nikulux.Shop1234;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
