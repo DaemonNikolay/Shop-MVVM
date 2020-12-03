@@ -50,15 +50,15 @@ class OperatingTimeViewController: UIViewController {
 	}
 	
 	@IBAction func openingTimeChanged(_ sender: UIDatePicker) {
-		print(sender.date)
+		self.viewModel.updateOpeningTimeOf(sender.date)
 	}
 	
 	@IBAction func closingTimeChanged(_ sender: UIDatePicker) {
-		print(sender.date)
+		self.viewModel.updateClosingTimeOf(sender.date)
 	}
 	
 	@IBAction func saveClick(_ sender: UIButton) {
-		self.viewModel.showShopList()
+		self.viewModel.updateCurrentShop()
 	}
 }
 

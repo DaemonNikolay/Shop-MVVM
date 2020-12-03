@@ -58,17 +58,12 @@ class DataSource {
 		return shop
 	}
 	
-	func updateShop(id: UUID, newShop: Shop) -> Bool {
-		guard let _ = self.shop(id: id.description) else {
-			return false
+	func updateShop(shop: Shop) {
+		guard let _ = self.shop(id: shop.id.description) else {
+			return
 		}
 		
-		if newShop.id != id {
-			self.dataSource.setValue(newShop, forKey: id.description)
-			return true
-		}
-
-		return false
+		try? self.dataSource.setObject(shop, forKey: shop.id.description)
 	}
 	
 	private func getShopIds() -> Array<String>? {
