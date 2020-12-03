@@ -15,13 +15,13 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	private let cellReuseIdentifier: String = "myCell"
 	
 	
-	required init (container: Container) {
+	init (container: Container) {
 		self.viewModel = container.viewModel
-		super.init(nibName: nil, bundle: nil)
+		super.init(nibName: "ShopListViewController", bundle: nil)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
+		fatalError("")
 	}
 	
 	override func viewDidLoad() {
