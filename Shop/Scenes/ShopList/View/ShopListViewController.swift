@@ -17,7 +17,7 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 	
 	init (container: Container) {
 		self.viewModel = container.viewModel
-		super.init(nibName: nil, bundle: nil)
+		super.init(nibName: "ShopListViewController", bundle: nil)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
