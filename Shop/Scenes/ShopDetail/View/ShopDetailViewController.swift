@@ -48,37 +48,30 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let (propertyName, propertyValue) = self.viewModel.propertyOfShopBy(indexPath.row)
+		self.viewModel.actionOnCellTap(numberRow: indexPath.row,
+									   completion: { type, title, propertyValue in
+										
+										self.actionOnCellTap(type: type,
+															 title: title,
+															 propertyValue: propertyValue)
+		})
+	}
+	
+	private func actionOnCellTap(type: ActionType, title: String?, propertyValue: String?) {
+		switch type {
+		case .popupText:
+			self.showDialogPopupOfText(title: title ?? "-",
+									   currentValue: propertyValue ?? "-")
+			
+		case .popupShopType:
+			self.showDialogPopupOfShopType(title: title ?? "-",
+										   currentValue: propertyValue ?? "-")
 		
-		let title: String = propertyName?.rawValue ?? "-"
-		
-		switch propertyName {
-		case .type:
-			guard let shopType: ShopType = ShopType.init(rawValue: propertyValue) else {
-				return
-			}
-			
-			self.showDialogPopupOfShopType(title: title,
-										   currentValue: shopType)
-		case .name:
-			self.showDialogPopupOfText(title: title,
-									   currentValue: propertyValue)
-			
-		case .employeesNumber:
-			print("-")
-			
-		case .officeHours:
+		case .showOperatingTime:
 			self.viewModel.showOperatingTime()
-			
-		case .openingDate:
-			print("-")
-			
-		default:
-			print("-")
 		}
 	}
 	
-
 	private func showDialogPopupOfText(title: String, currentValue: String) {
 		let alert = UIAlertController(title: title, message: "Current: \(currentValue)", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -96,7 +89,7 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 		self.present(alert, animated: true)
 	}
 	
-	private func showDialogPopupOfShopType(title: String, currentValue: ShopType) {
+	private func showDialogPopupOfShopType(title: String, currentValue: String) {
 		let alert = UIAlertController(title: title, message: "Current: \(currentValue)", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
@@ -119,4 +112,10 @@ extension ShopDetailViewController {
 	struct Container {
 		let viewModel: ShopDetailViewModel
 	}
+}
+
+enum ActionType {
+	case popupShopType
+	case popupText
+	case showOperatingTime
 }

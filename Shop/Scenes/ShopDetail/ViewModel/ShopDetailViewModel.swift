@@ -43,6 +43,35 @@ struct ShopDetailViewModel {
 		return (key, value)
 	}
 	
+	func actionOnCellTap(numberRow: Int, completion: @escaping (_ type: ActionType,
+																_ propertyName: String?,
+																_ propertyValue: String?) -> Void) {
+		
+		let (propertyName, propertyValue) = self.propertyOfShopBy(numberRow)
+		
+		let title: String? = propertyName?.rawValue
+		
+		switch propertyName {
+		case .type:
+			completion(.popupShopType, title, propertyValue)
+
+		case .name:
+			completion(.popupText, title, propertyValue)
+			
+		case .employeesNumber:
+			print("-")
+			
+		case .officeHours:
+			completion(.showOperatingTime, nil, nil)
+			
+		case .openingDate:
+			print("-")
+			
+		default:
+			print("-")
+		}
+	}
+	
 	func formatPropertyOfShopBy(_ index: Int) -> String {
 		let (key, value) = self.propertyOfShopBy(index)
 		
