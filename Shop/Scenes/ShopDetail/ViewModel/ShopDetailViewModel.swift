@@ -19,25 +19,34 @@ struct ShopDetailViewModel {
 		self.currentShop = dataSource.currentShop
 	}
 	
-	func propertyOfShopBy(_ index: Int) -> String {
+	func propertyOfShopBy(_ index: Int) -> (Shop.DetailNames?, String) {
 		guard let currentShop = self.currentShop else {
-			return "-"
+			return (nil, "-")
 		}
 		
 		let key: Shop.DetailNames = Shop.DetailNames.allCases[index]
+		var value: String
 		
 		switch key {
 		case .employeesNumber:
-			return "\(key.rawValue): \(currentShop.employeesNumber)"
+			value = currentShop.employeesNumber.description
 		case .type:
-			return "\(key.rawValue): \(currentShop.type)"
+			value = currentShop.type.rawValue
 		case .openingDate:
-			return "\(key.rawValue): \(currentShop.openingDate)"
+			value = currentShop.openingDate.description
 		case .name:
-			return "\(key.rawValue): \(currentShop.name)"
+			value = currentShop.name
 		case .officeHours:
-			return "\(key.rawValue): \(currentShop.officeHours.opening):\(currentShop.officeHours.closing)"
+			value = "\(currentShop.officeHours.opening):\(currentShop.officeHours.closing)"
 		}
+		
+		return (key, value)
+	}
+	
+	func formatPropertyOfShopBy(_ index: Int) -> String {
+		let (key, value) = self.propertyOfShopBy(index)
+		
+		return "\(key?.rawValue ?? "-"): \(value)"
 	}
 }
 

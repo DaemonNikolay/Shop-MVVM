@@ -38,7 +38,6 @@
 		735FE3FC2576192B00C6E984 /* AutoFillDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FE3FB2576192B00C6E984 /* AutoFillDB.swift */; };
 		7370C6D72574E5E40008E85A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7370C6D62574E5E40008E85A /* DataSource.swift */; };
 		73BEA2F42578B37C00A42B68 /* ShopDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73BEA2F32578B37C00A42B68 /* ShopDetailViewController.xib */; };
-		73BEA2F72578B52800A42B68 /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73BEA2F62578B52800A42B68 /* SettingCell.xib */; };
 		73BEA2FA2578BC1D00A42B68 /* ShopDetailModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73BEA2F92578BC1D00A42B68 /* ShopDetailModule.swift */; };
 /* End PBXBuildFile section */
 
@@ -78,7 +77,6 @@
 		735FE3FB2576192B00C6E984 /* AutoFillDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFillDB.swift; sourceTree = "<group>"; };
 		7370C6D62574E5E40008E85A /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		73BEA2F32578B37C00A42B68 /* ShopDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShopDetailViewController.xib; sourceTree = "<group>"; };
-		73BEA2F62578B52800A42B68 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
 		73BEA2F92578BC1D00A42B68 /* ShopDetailModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,7 +226,6 @@
 			children = (
 				734A165B2574C8200003B555 /* ShopDetailViewController.swift */,
 				73BEA2F32578B37C00A42B68 /* ShopDetailViewController.xib */,
-				73BEA2F62578B52800A42B68 /* SettingCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,7 +426,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				734A163A2574AD680003B555 /* LaunchScreen.storyboard in Resources */,
-				73BEA2F72578B52800A42B68 /* SettingCell.xib in Resources */,
 				73BEA2F42578B37C00A42B68 /* ShopDetailViewController.xib in Resources */,
 				734A16372574AD680003B555 /* Assets.xcassets in Resources */,
 				734698F22577A1C400B55191 /* ShopListViewController.xib in Resources */,

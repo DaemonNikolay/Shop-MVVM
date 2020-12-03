@@ -10,7 +10,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShopDetailViewController" customModule="Shop" customModuleProvider="target">
             <connections>
-                <outlet property="editButton" destination="9RZ-FB-6Ac" id="Svw-fl-IAa"/>
                 <outlet property="saveButton" destination="jXS-pE-6Dh" id="vzg-FY-CgN"/>
                 <outlet property="settingsTable" destination="ckt-lj-x1S" id="LZX-pX-FmO"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Ubc-JW-Aar"/>
@@ -33,18 +32,8 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <items>
                         <navigationItem title="Title" id="YAT-yb-DNQ">
-                            <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="PJG-D0-3KY">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="9RZ-FB-6Ac">
-                                    <rect key="frame" x="20" y="7" width="92" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Edit"/>
-                                    <connections>
-                                        <action selector="editClick:" destination="-1" eventType="touchUpInside" id="VLz-gy-WcQ"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
                             <barButtonItem key="rightBarButtonItem" style="plain" id="5wS-YM-oEV">
-                                <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="jXS-pE-6Dh">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="jXS-pE-6Dh">
                                     <rect key="frame" x="302" y="7" width="92" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Save"/>
