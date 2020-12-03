@@ -11,12 +11,12 @@ struct ShopDetailViewModel {
 	private let router: ShopDetailRouter
 	
 	let currentShop: Shop?
+	private let dataSource: DataSource = DataSource.shared
 	
 	init(container: Container) {
 		self.router = container.router
 		
-		let dataSource = DataSource.shared
-		self.currentShop = dataSource.currentShop
+		self.currentShop = self.dataSource.currentShop
 	}
 	
 	func propertyOfShopBy(_ index: Int) -> (Shop.DetailNames?, String) {
@@ -45,7 +45,8 @@ struct ShopDetailViewModel {
 	
 	func actionOnCellTap(numberRow: Int, completion: @escaping (_ type: ActionType,
 																_ propertyName: String?,
-																_ propertyValue: String?) -> Void) {
+																_ propertyValue: String?,
+																_ propertyType: Shop.DetailNames?) -> Void) {
 		
 		let (propertyName, propertyValue) = self.propertyOfShopBy(numberRow)
 		
@@ -53,22 +54,22 @@ struct ShopDetailViewModel {
 		
 		switch propertyName {
 		case .type:
-			completion(.popupShopType, title, propertyValue)
+			completion(.popupShopType, title, propertyValue, propertyName)
 
 		case .name:
-			completion(.popupText, title, propertyValue)
+			completion(.popupText, title, propertyValue, propertyName)
 			
 		case .employeesNumber:
-			print("-")
+			completion(.popupNumbers, title, propertyValue, propertyName)
 			
 		case .officeHours:
-			completion(.showOperatingTime, nil, nil)
+			completion(.showOperatingTime, nil, nil, nil)
 			
 		case .openingDate:
 			print("-")
 			
 		default:
-			print("-")
+			print("~~~~~")
 		}
 	}
 	
@@ -84,6 +85,49 @@ struct ShopDetailViewModel {
 	
 	func showShopList() {
 		self.router.showShopList()
+	}
+	
+	func updateShop(shopDetailType: Shop.DetailNames, value: String, completion: @escaping () -> Void) {
+		switch shopDetailType {
+		case .name:
+			self.updateNameOfShop(value)
+		case .employeesNumber:
+			guard let employees = UInt(value) else {
+				return
+			}
+			
+			self.updateEmployeesNumberOfShop(employees)
+		case .type:
+			guard let type = ShopType(rawValue: value) else {
+				return
+			}
+			
+			self.updateTypeOfShop(type)
+		default:
+			break
+		}
+		
+		completion()
+	}
+	
+	func updateNameOfShop(_ name: String) {
+		self.currentShop?.name = name
+	}
+	
+	func updateEmployeesNumberOfShop(_ number: UInt) {
+		self.currentShop?.employeesNumber = number
+	}
+	
+	func updateTypeOfShop(_ type: ShopType) {
+		self.currentShop?.type = type
+	}
+	
+	func saveShop(completion: @escaping () -> Void) {
+		if let shop = self.currentShop {
+			self.dataSource.updateShop(shop: shop)
+		}
+		
+		completion()
 	}
 }
 

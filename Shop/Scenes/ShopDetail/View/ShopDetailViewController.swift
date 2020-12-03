@@ -49,47 +49,78 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.viewModel.actionOnCellTap(numberRow: indexPath.row,
-									   completion: { type, title, propertyValue in
+									   completion: { type, title, propertyValue, propertyType in
 										
 										self.actionOnCellTap(type: type,
-															 title: title,
-															 propertyValue: propertyValue)
+															 propertyName: title,
+															 propertyValue: propertyValue,
+															 propertyType: propertyType)
 		})
 	}
 	
-	private func actionOnCellTap(type: ActionType, title: String?, propertyValue: String?) {
+	private func actionOnCellTap(type: ActionType,
+								 propertyName: String?,
+								 propertyValue: String?,
+								 propertyType: Shop.DetailNames?) {
+		
+		let title: String = propertyName ?? "-"
+		let value: String = propertyValue ?? "-"
+		
 		switch type {
 		case .popupText:
-			self.showDialogPopupOfText(title: title ?? "-",
-									   currentValue: propertyValue ?? "-")
-			
+			self.showDialogPopupOfText(title: title, currentValue: value, shopDetailType: propertyType!)
 		case .popupShopType:
-			self.showDialogPopupOfShopType(title: title ?? "-",
-										   currentValue: propertyValue ?? "-")
-		
+			self.showDialogPopupOfShopType(title: title, currentValue: value, shopDetailType: propertyType!)
 		case .showOperatingTime:
 			self.viewModel.showOperatingTime()
+		case .popupNumbers:
+			self.showDialogPopupOfNumbers(title: title, currentValue: value, shopDetailType: propertyType!)
 		}
 	}
 	
-	private func showDialogPopupOfText(title: String, currentValue: String) {
+	private func showDialogPopupOfText(title: String,
+									   currentValue: String,
+									   shopDetailType: Shop.DetailNames) {
+		
 		let alert = UIAlertController(title: title, message: "Current: \(currentValue)", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-
+		
 		alert.addTextField(configurationHandler: { textField in
+			if shopDetailType == .employeesNumber {
+				textField.keyboardType = .numberPad
+			}
+			
 			textField.placeholder = "Enter..."
 		})
 
 		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-			if let value = alert.textFields?.first?.text {
-				print(value)
+			guard let value = alert.textFields?.first?.text else {
+				return
 			}
+			
+			self.viewModel.updateShop(shopDetailType: shopDetailType,
+									  value: value,
+									  completion: {
+										self.settingsTable.reloadData()
+									  })
 		}))
 
 		self.present(alert, animated: true)
 	}
 	
-	private func showDialogPopupOfShopType(title: String, currentValue: String) {
+	private func showDialogPopupOfNumbers(title: String,
+										  currentValue: String,
+										  shopDetailType: Shop.DetailNames) {
+		
+		self.showDialogPopupOfText(title: title,
+								   currentValue: currentValue,
+								   shopDetailType: shopDetailType)
+	}
+	
+	private func showDialogPopupOfShopType(title: String,
+										   currentValue: String,
+										   shopDetailType: Shop.DetailNames) {
+		
 		let alert = UIAlertController(title: title, message: "Current: \(currentValue)", preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
@@ -104,7 +135,9 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	
 	@IBAction func saveClick(_ sender: UIButton) {
-		self.viewModel.showShopList()
+		self.viewModel.saveShop {
+			self.viewModel.showShopList()
+		}
 	}
 }
 
@@ -117,5 +150,6 @@ extension ShopDetailViewController {
 enum ActionType {
 	case popupShopType
 	case popupText
+	case popupNumbers
 	case showOperatingTime
 }
