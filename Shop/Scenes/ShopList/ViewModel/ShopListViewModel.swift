@@ -51,7 +51,8 @@ struct ShopListViewModel {
 			return
 		}
 		
-		print(shop.id)
+		var dataSource = DataSource.shared
+		dataSource.currentShop = shop
 		
 		self.transitionToShopDetail()
 	}

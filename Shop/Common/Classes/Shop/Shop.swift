@@ -61,3 +61,13 @@ class Shop: Codable {
 		try container.encode(self.officeHours, forKey: .officeHours)
 	}
 }
+
+extension Shop {
+	enum DetailNames: String, CaseIterable {
+		case name = "Name"
+		case type = "Type"
+		case employeesNumber = "Employees number"
+		case openingDate = "Opening date"
+		case officeHours = "Office hours"
+	}
+}

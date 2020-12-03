@@ -22,18 +22,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ckt-lj-x1S">
-                    <rect key="frame" x="20" y="88" width="374" height="774"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Pzv-s6-uO7"/>
                         <outlet property="delegate" destination="-1" id="4N7-9H-xQU"/>
                     </connections>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cT3-Xd-70I">
+                <navigationBar contentMode="scaleToFill" backIndicatorImage="arrow.backward" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cT3-Xd-70I">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <items>
                         <navigationItem title="Title" id="YAT-yb-DNQ">
-                            <barButtonItem key="leftBarButtonItem" style="plain" id="PJG-D0-3KY">
+                            <barButtonItem key="leftBarButtonItem" title="Item" style="plain" id="PJG-D0-3KY">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="9RZ-FB-6Ac">
                                     <rect key="frame" x="20" y="7" width="92" height="30"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -64,17 +64,18 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="ckt-lj-x1S" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="44" id="Ehh-25-TSc"/>
-                <constraint firstItem="ckt-lj-x1S" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" id="INE-pe-RPh"/>
+                <constraint firstItem="ckt-lj-x1S" firstAttribute="trailing" secondItem="iN0-l3-epB" secondAttribute="trailingMargin" constant="20" id="INE-pe-RPh"/>
                 <constraint firstItem="ckt-lj-x1S" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="SFa-hC-FyL"/>
                 <constraint firstItem="cT3-Xd-70I" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="kqA-Yl-Rvj"/>
                 <constraint firstItem="cT3-Xd-70I" firstAttribute="centerX" secondItem="ckt-lj-x1S" secondAttribute="centerX" id="pQ5-jQ-R9l"/>
                 <constraint firstItem="cT3-Xd-70I" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="vIW-ru-4Sa"/>
-                <constraint firstItem="ckt-lj-x1S" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="xIr-Fk-KHD"/>
+                <constraint firstItem="ckt-lj-x1S" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" constant="-20" id="xIr-Fk-KHD"/>
             </constraints>
             <point key="canvasLocation" x="131.8840579710145" y="131.91964285714286"/>
         </view>
     </objects>
     <resources>
+        <image name="arrow.backward" catalog="system" width="128" height="98"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -187,10 +187,10 @@
 		734A16442574B6A50003B555 /* ShopDetail */ = {
 			isa = PBXGroup;
 			children = (
+				73BEA2F92578BC1D00A42B68 /* ShopDetailModule.swift */,
 				734A164F2574BDBA0003B555 /* ViewModel */,
 				734A164C2574BD980003B555 /* Router */,
 				734A16482574BD4F0003B555 /* View */,
-				73BEA2F92578BC1D00A42B68 /* ShopDetailModule.swift */,
 			);
 			path = ShopDetail;
 			sourceTree = "<group>";
