@@ -9,10 +9,12 @@ import Foundation
 import os.log
 
 struct OfficeHours: Codable {
-	private var _opening: UInt = .min
-	var opening: UInt {
+	private var _opening: Float = .zero
+	var opening: Float {
 		set {
-			if newValue > 24 {
+			let value = abs(newValue)
+			
+			if value > 24 {
 				os_log("The opening time must be in the range from 0 to 24 and more closing time.",
 					   log: .default,
 					   type: .fault)
@@ -20,16 +22,18 @@ struct OfficeHours: Codable {
 				return
 			}
 			
-			self._opening = newValue
+			self._opening = value
 		}
 		
 		get { self._opening }
 	}
 	
-	private var _closing: UInt = .min
-	var closing: UInt {
+	private var _closing: Float = .zero
+	var closing: Float {
 		set {
-			if newValue > 24 {
+			let value = abs(newValue)
+			
+			if value > 24 {
 				os_log("The closing time must be in the range from 0 to 24 and more opening time.",
 					   log: .default,
 					   type: .fault)
@@ -37,13 +41,13 @@ struct OfficeHours: Codable {
 				return
 			}
 			
-			self._closing = newValue
+			self._closing = value
 		}
 		
 		get { self._closing }
 	}
 	
-	init(opening: UInt, closing: UInt) {
+	init(opening: Float, closing: Float) {
 		self.opening = opening
 		self.closing = closing
 	}

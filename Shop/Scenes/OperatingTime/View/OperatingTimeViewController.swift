@@ -25,6 +25,28 @@ class OperatingTimeViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		
+		self.setupOperatingTime()
+	}
+	
+	private func setupOperatingTime() {
+		guard let operatingTime = self.viewModel.currentShopOperatingTime else {
+			return
+		}
+		
+		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
+		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
+	}
+	
+	private func extractDateFrom(_ time: Float) -> Date {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "HH.mm"
+
+		guard let date = dateFormatter.date(from: time.description) else {
+			return Date()
+		}
+		
+		return date
 	}
 	
 	@IBAction func openingTimeChanged(_ sender: UIDatePicker) {

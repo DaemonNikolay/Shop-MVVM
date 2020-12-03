@@ -10,8 +10,13 @@ import Foundation
 struct OperatingTimeViewModel {
 	private let router: OperatingTimeRouter
 	
+	var currentShopOperatingTime: OfficeHours?
+	
 	init(container: Container) {
 		self.router = container.router
+		
+		let dataSource = DataSource.shared
+		self.currentShopOperatingTime = dataSource.currentShop?.officeHours
 	}
 	
 	func showShopList() {
