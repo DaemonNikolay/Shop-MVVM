@@ -9,16 +9,15 @@ import UIKit
 
 class OperatingTimeModule {
 	let view: UIViewController
-	let router: OperatingTimeRouter
 	
 	init(transition: Transition) {
-		self.router = OperatingTimeRouter()
+		let router = OperatingTimeRouter()
 		
-		let viewModel = OperatingTimeViewModel(container: .init(router: self.router))
+		let viewModel = OperatingTimeViewModel(container: .init(router: router))
 		let view = OperatingTimeViewController(container: .init(viewModel: viewModel))
 		
-		self.router.viewController = view
-		self.router.openTransition = transition
+		router.viewController = view
+		router.openTransition = transition
 		
 		self.view = view
 	}
