@@ -76,9 +76,3 @@ class DataSource {
 		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
 	}
 }
-
-extension DataSource: NSCopying {
-	func copy(with zone: NSZone? = nil) -> Any {
-		return self
-	}
-}
