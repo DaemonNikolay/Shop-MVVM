@@ -8,18 +8,17 @@
 import Foundation
 import UIKit
 
-class ShopDetailModule {
+struct ShopDetailModule {
 	let view: UIViewController
-	let router: ShopDetailRouter
 	
 	init(transition: Transition) {
-		self.router = ShopDetailRouter()
+		let router = ShopDetailRouter()
 		
-		let viewModel = ShopDetailViewModel(container: .init(router: self.router))
+		let viewModel = ShopDetailViewModel(container: .init(router: router))
 		let view = ShopDetailViewController(container: .init(viewModel: viewModel))
 		
-		self.router.viewController = view
-		self.router.openTransition = transition
+		router.viewController = view
+		router.openTransition = transition
 		
 		self.view = view
 	}

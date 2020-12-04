@@ -26,14 +26,16 @@ class OperatingTimeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setupOperatingTime()
+		self.setupOutput()
 	}
 	
-	private func setupOperatingTime() {
-		guard let operatingTime = self.viewModel.currentShopOperatingTime else {
-			return
-		}
-		
+	private func setupOutput() {
+		self.viewModel.didLoad(completion: { [weak self] (operatingTime) in
+			self?.setupOperatingTime(operatingTime)
+		})
+	}
+	
+	private func setupOperatingTime(_ operatingTime: OfficeHours) {
 		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
 		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
 	}
@@ -42,9 +44,7 @@ class OperatingTimeViewController: UIViewController {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "HH.mm"
 
-		guard let date = dateFormatter.date(from: time.description) else {
-			return Date()
-		}
+		guard let date = dateFormatter.date(from: time.description) else { return Date() }
 		
 		return date
 	}
@@ -57,7 +57,7 @@ class OperatingTimeViewController: UIViewController {
 		self.viewModel.updateClosingTimeOf(sender.date)
 	}
 	
-	@IBAction func saveClick(_ sender: UIButton) {
+	@IBAction func saveTap(_ sender: UIButton) {
 		self.viewModel.updateCurrentShop()
 	}
 }
@@ -66,4 +66,8 @@ extension OperatingTimeViewController {
 	struct Container {
 		let viewModel: OperatingTimeViewModel
 	}
+}
+
+extension OperatingTimeViewController: OperatingTimeViewModelOutput {
+	
 }

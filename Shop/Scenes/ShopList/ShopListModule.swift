@@ -10,12 +10,11 @@ import UIKit
 
 struct ShopListModule {
 	let view: UIViewController
-	let router: ShopListRouter
 	
 	init(transition: Transition) {
-		self.router = ShopListRouter()
+		let router = ShopListRouter()
 		
-		let viewModel = ShopListViewModel(container: .init(router: self.router))
+		let viewModel = ShopListViewModel(container: .init(router: router))
 		let view = ShopListViewController(container: .init(viewModel: viewModel))
 		
 		router.viewController = view

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
@@ -33,37 +33,9 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 		self.settingsTable.register(UITableViewCell.self,
 									forCellReuseIdentifier: self.cellReuseIdentifier)
 	}
+
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		Shop.DetailNames.allCases.count
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = self.settingsTable.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier,
-														  for: indexPath)
-		
-		cell.textLabel?.text = self.viewModel.formatPropertyOfShopBy(indexPath.row)
-		
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		self.viewModel.actionOnCellTap(numberRow: indexPath.row,
-									   completion: { type in
-										
-										self.actionOnCellTap(type: type)
-		})
-	}
-	
-	private func actionOnCellTap(type: ActionType) {
-		
-		switch type {
-		case .showOperatingTime:
-			self.viewModel.showOperatingTime()
-		}
-	}
-	
-	@IBAction func saveClick(_ sender: UIButton) {
+	@IBAction func saveTap(_ sender: UIButton) {
 		self.viewModel.saveShop {
 			self.viewModel.showShopList()
 		}
@@ -76,6 +48,39 @@ extension ShopDetailViewController {
 	}
 }
 
-enum ActionType {
-	case showOperatingTime
+
+// MARK: - TableView
+
+extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		Shop.DetailNames.allCases.count
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = self.settingsTable.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier,
+														  for: indexPath)
+		
+		let (content, shopDetailKey) = self.viewModel.formatPropertyOfShopBy(indexPath.row)
+		
+		if let shopDetailKey = shopDetailKey {
+			if shopDetailKey == .officeHours {
+				cell.tag = 1
+			}
+		}
+		
+		cell.textLabel?.text = content
+		
+		return cell
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let cell = tableView.cellForRow(at: indexPath)
+		if cell?.tag == 1 {
+			self.actionOnCellTap()
+		}
+	}
+	
+	private func actionOnCellTap() {
+		self.viewModel.showOperatingTime()
+	}
 }

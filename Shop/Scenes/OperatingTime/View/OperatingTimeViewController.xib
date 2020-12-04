@@ -85,7 +85,7 @@
                                         <color key="titleShadowColor" name="AccentColor"/>
                                     </state>
                                     <connections>
-                                        <action selector="saveClick:" destination="-1" eventType="touchUpInside" id="i89-AG-dJH"/>
+                                        <action selector="saveTap:" destination="-1" eventType="touchUpInside" id="i89-AG-dJH"/>
                                     </connections>
                                 </button>
                                 <color key="tintColor" name="AccentColor"/>

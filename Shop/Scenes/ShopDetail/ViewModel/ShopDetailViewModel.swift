@@ -7,22 +7,20 @@
 
 import Foundation
 
-struct ShopDetailViewModel {
+struct ShopDetailViewModel: ShopDetailViewModelInput {
 	private let router: ShopDetailRouter
+	private let dataSource: DataSource = DataSource.shared
 	
 	let currentShop: Shop?
-	private let dataSource: DataSource = DataSource.shared
+	
 	
 	init(container: Container) {
 		self.router = container.router
-		
 		self.currentShop = self.dataSource.currentShop
 	}
 	
-	func propertyOfShopBy(_ index: Int) -> (Shop.DetailNames?, String) {
-		guard let currentShop = self.currentShop else {
-			return (nil, "-")
-		}
+	func formatPropertyOfShopBy(_ index: Int) -> (String, Shop.DetailNames?) {
+		guard let currentShop = self.currentShop else { return ("-", nil) }
 		
 		let key: Shop.DetailNames = Shop.DetailNames.allCases[index]
 		var value: String
@@ -40,26 +38,7 @@ struct ShopDetailViewModel {
 			value = "\(currentShop.officeHours.opening):\(currentShop.officeHours.closing)"
 		}
 		
-		return (key, value)
-	}
-	
-	func actionOnCellTap(numberRow: Int, completion: @escaping (_ type: ActionType) -> Void) {
-		
-		let (propertyName, _) = self.propertyOfShopBy(numberRow)
-		
-		switch propertyName {
-
-		case .officeHours:
-			completion(.showOperatingTime)
-		default:
-			break
-		}
-	}
-	
-	func formatPropertyOfShopBy(_ index: Int) -> String {
-		let (key, value) = self.propertyOfShopBy(index)
-		
-		return "\(key?.rawValue ?? "-"): \(value)"
+		return ("\(key.rawValue): \(value)", key)
 	}
 	
 	func showOperatingTime() {
@@ -75,15 +54,11 @@ struct ShopDetailViewModel {
 		case .name:
 			self.updateNameOfShop(value)
 		case .employeesNumber:
-			guard let employees = UInt(value) else {
-				return
-			}
+			guard let employees = UInt(value) else { return }
 			
 			self.updateEmployeesNumberOfShop(employees)
 		case .type:
-			guard let type = ShopType(rawValue: value) else {
-				return
-			}
+			guard let type = ShopType(rawValue: value) else { return }
 			
 			self.updateTypeOfShop(type)
 		default:
