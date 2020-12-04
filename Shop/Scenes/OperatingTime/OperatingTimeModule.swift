@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OperatingTimeModule {
+struct OperatingTimeModule {
 	let view: UIViewController
 	
 	init(transition: Transition) {
