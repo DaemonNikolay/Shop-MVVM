@@ -60,17 +60,24 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 		let cell = self.settingsTable.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier,
 														  for: indexPath)
 		
-		cell.textLabel?.text = self.viewModel.formatPropertyOfShopBy(indexPath.row)
+		let (content, shopDetailKey) = self.viewModel.formatPropertyOfShopBy(indexPath.row)
+		
+		if let shopDetailKey = shopDetailKey {
+			if shopDetailKey == .officeHours {
+				cell.tag = 1
+			}
+		}
+		
+		cell.textLabel?.text = content
 		
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		self.viewModel.actionOnCellTap(numberRow: indexPath.row,
-									   completion: {
-										
-										self.actionOnCellTap()
-		})
+		let cell = tableView.cellForRow(at: indexPath)
+		if cell?.tag == 1 {
+			self.actionOnCellTap()
+		}
 	}
 	
 	private func actionOnCellTap() {
