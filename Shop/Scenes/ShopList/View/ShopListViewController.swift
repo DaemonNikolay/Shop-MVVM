@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShopListViewController: UIViewController {
+class ShopListViewController: UIViewController, ShopListViewModelOutput {
 	
 	@IBOutlet weak var tableShops: UITableView!
 	

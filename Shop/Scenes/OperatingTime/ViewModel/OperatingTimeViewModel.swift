@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OperatingTimeViewModel {
+struct OperatingTimeViewModel: OperatingTimeViewModelInput {
 	private let router: OperatingTimeRouter
 	
 	var currentShopOperatingTime: OfficeHours?

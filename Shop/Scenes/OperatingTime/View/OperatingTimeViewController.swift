@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OperatingTimeViewController: UIViewController {
+class OperatingTimeViewController: UIViewController, OperatingTimeViewModelOutput {
 	@IBOutlet weak var openingTime: UIDatePicker!
 	@IBOutlet weak var closingTime: UIDatePicker!
 	

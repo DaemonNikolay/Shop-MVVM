@@ -49,7 +49,6 @@ extension ShopDetailViewController {
 }
 
 
-
 // MARK: - TableView
 
 extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ShopListViewModel {
+struct ShopListViewModel: ShopListViewModelInput {
 	private let router: ShopListRouter
 	
 	typealias ShopData = [String: [Shop]]
