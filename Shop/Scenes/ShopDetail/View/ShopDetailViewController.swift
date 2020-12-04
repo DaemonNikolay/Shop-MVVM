@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopDetailViewController: UIViewController {
 	
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
@@ -33,7 +33,29 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 		self.settingsTable.register(UITableViewCell.self,
 									forCellReuseIdentifier: self.cellReuseIdentifier)
 	}
+
 	
+	@IBAction func saveTap(_ sender: UIButton) {
+		self.viewModel.saveShop {
+			self.viewModel.showShopList()
+		}
+	}
+}
+
+extension ShopDetailViewController {
+	struct Container {
+		let viewModel: ShopDetailViewModel
+	}
+}
+
+enum ActionType {
+	case showOperatingTime
+}
+
+
+// MARK: - TableView
+
+extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		Shop.DetailNames.allCases.count
 	}
@@ -62,20 +84,4 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 			self.viewModel.showOperatingTime()
 		}
 	}
-	
-	@IBAction func saveTap(_ sender: UIButton) {
-		self.viewModel.saveShop {
-			self.viewModel.showShopList()
-		}
-	}
-}
-
-extension ShopDetailViewController {
-	struct Container {
-		let viewModel: ShopDetailViewModel
-	}
-}
-
-enum ActionType {
-	case showOperatingTime
 }

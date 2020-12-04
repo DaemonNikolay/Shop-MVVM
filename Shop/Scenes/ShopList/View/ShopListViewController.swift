@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShopListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopListViewController: UIViewController {
 	
 	@IBOutlet weak var tableShops: UITableView!
 	
@@ -31,6 +31,28 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 								 forCellReuseIdentifier: self.cellReuseIdentifier)
 	}
 	
+	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
+		let viewModel = self.viewModel
+		
+		let startIndex = viewModel.shops.startIndex
+		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)
+		let key = viewModel.shops.keys[index]
+		
+		return key
+	}
+}
+
+
+extension ShopListViewController {
+	struct Container {
+		let viewModel: ShopListViewModel
+	}
+}
+
+
+// MARK: - TableView
+
+extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
 		self.viewModel.shops.count
 	}
@@ -73,22 +95,5 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 		let key = self.keyOfShopOffsetBy(indexPath.section)
 		
 		self.viewModel.showShopDetail(shopName: name, shopType: key)
-	}
-	
-	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
-		let viewModel = self.viewModel
-		
-		let startIndex = viewModel.shops.startIndex
-		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)
-		let key = viewModel.shops.keys[index]
-		
-		return key
-	}
-}
-
-
-extension ShopListViewController {
-	struct Container {
-		let viewModel: ShopListViewModel
 	}
 }
