@@ -63,7 +63,7 @@ class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableVi
 		}
 	}
 	
-	@IBAction func saveClick(_ sender: UIButton) {
+	@IBAction func saveTap(_ sender: UIButton) {
 		self.viewModel.saveShop {
 			self.viewModel.showShopList()
 		}

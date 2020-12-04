@@ -57,7 +57,7 @@ class OperatingTimeViewController: UIViewController {
 		self.viewModel.updateClosingTimeOf(sender.date)
 	}
 	
-	@IBAction func saveClick(_ sender: UIButton) {
+	@IBAction func saveTap(_ sender: UIButton) {
 		self.viewModel.updateCurrentShop()
 	}
 }
