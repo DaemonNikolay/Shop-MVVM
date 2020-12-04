@@ -22,9 +22,7 @@ struct ShopListViewModel {
 	
 	func shopsInit() -> ShopData {
 		let dataSource = DataSource.shared
-		guard let shops = dataSource.shops() else {
-			return [:]
-		}
+		guard let shops = dataSource.shops() else {	return [:] }
 		
 		var result: ShopData = [:]
 		
@@ -47,9 +45,7 @@ struct ShopListViewModel {
 	}
 	
 	func showShopDetail(shopName: String, shopType: String) {
-		guard let shop = self.shop(name: shopName, key: shopType) else {
-			return
-		}
+		guard let shop = self.shop(name: shopName, key: shopType) else { return	}
 		
 		let dataSource = DataSource.shared
 		dataSource.currentShop = shop

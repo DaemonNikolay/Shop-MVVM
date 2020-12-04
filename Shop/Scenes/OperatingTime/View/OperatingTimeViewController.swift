@@ -30,9 +30,7 @@ class OperatingTimeViewController: UIViewController {
 	}
 	
 	private func setupOperatingTime() {
-		guard let operatingTime = self.viewModel.currentShopOperatingTime else {
-			return
-		}
+		guard let operatingTime = self.viewModel.currentShopOperatingTime else { return }
 		
 		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
 		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
@@ -42,9 +40,7 @@ class OperatingTimeViewController: UIViewController {
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "HH.mm"
 
-		guard let date = dateFormatter.date(from: time.description) else {
-			return Date()
-		}
+		guard let date = dateFormatter.date(from: time.description) else { return Date() }
 		
 		return date
 	}

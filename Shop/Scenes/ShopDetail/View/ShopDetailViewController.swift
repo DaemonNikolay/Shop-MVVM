@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ShopDetailViewController: UIViewController {
+class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
@@ -48,9 +48,6 @@ extension ShopDetailViewController {
 	}
 }
 
-enum ActionType {
-	case showOperatingTime
-}
 
 
 // MARK: - TableView
@@ -71,17 +68,13 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		self.viewModel.actionOnCellTap(numberRow: indexPath.row,
-									   completion: { type in
+									   completion: {
 										
-										self.actionOnCellTap(type: type)
+										self.actionOnCellTap()
 		})
 	}
 	
-	private func actionOnCellTap(type: ActionType) {
-		
-		switch type {
-		case .showOperatingTime:
-			self.viewModel.showOperatingTime()
-		}
+	private func actionOnCellTap() {
+		self.viewModel.showOperatingTime()
 	}
 }

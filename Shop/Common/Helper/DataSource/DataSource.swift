@@ -11,9 +11,7 @@ class DataSource {
 	private let keyShopIds: String = "shops"
 	
 	static var shared: DataSource = {
-		let dataSource = DataSource()
-		
-		return dataSource
+		DataSource()
 	}()
 	
 	private let dataSource: UserDefaults
@@ -34,14 +32,11 @@ class DataSource {
 	
 	func addShop(shop: Shop) {
 		try? self.dataSource.setObject(shop, forKey: shop.id.description)
-		
 		self.updateShopIds(id: shop.id.description)
 	}
 	
 	func shops() -> Array<Shop>? {
-		guard let shopIds: Array<String> = self.getShopIds() else {
-			return nil
-		}
+		guard let shopIds: Array<String> = self.getShopIds() else { return nil }
 
 		let shops: Array<Shop> = shopIds.map { shopId in
 			self.shop(id: shopId)!
@@ -51,17 +46,13 @@ class DataSource {
 	}
 	
 	func shop(id: String) -> Shop? {
-		guard let shop = try? dataSource.getObject(forKey: id, castTo: Shop.self) else {
-			return nil
-		}
+		guard let shop = try? dataSource.getObject(forKey: id, castTo: Shop.self) else { return nil }
 		
 		return shop
 	}
 	
 	func updateShop(shop: Shop) {
-		guard let _ = self.shop(id: shop.id.description) else {
-			return
-		}
+		guard let _ = self.shop(id: shop.id.description) else { return }
 		
 		try? self.dataSource.setObject(shop, forKey: shop.id.description)
 	}

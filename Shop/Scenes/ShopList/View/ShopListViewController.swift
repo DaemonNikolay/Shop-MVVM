@@ -88,9 +88,7 @@ extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else {
-			return
-		}
+		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
 		
 		let key = self.keyOfShopOffsetBy(indexPath.section)
 		
