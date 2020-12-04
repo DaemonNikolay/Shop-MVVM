@@ -19,8 +19,12 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 		self.currentShop = self.dataSource.currentShop
 	}
 	
-	func propertyOfShopBy(_ index: Int) -> (Shop.DetailNames?, String) {
-		guard let currentShop = self.currentShop else { return (nil, "-") }
+	func actionOnCellTap(numberRow: Int, completion: @escaping () -> Void) {
+		completion()
+	}
+	
+	func formatPropertyOfShopBy(_ index: Int) -> String {
+		guard let currentShop = self.currentShop else { return "-" }
 		
 		let key: Shop.DetailNames = Shop.DetailNames.allCases[index]
 		var value: String
@@ -38,17 +42,7 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 			value = "\(currentShop.officeHours.opening):\(currentShop.officeHours.closing)"
 		}
 		
-		return (key, value)
-	}
-	
-	func actionOnCellTap(numberRow: Int, completion: @escaping () -> Void) {
-		completion()
-	}
-	
-	func formatPropertyOfShopBy(_ index: Int) -> String {
-		let (key, value) = self.propertyOfShopBy(index)
-		
-		return "\(key?.rawValue ?? "-"): \(value)"
+		return "\(key.rawValue): \(value)"
 	}
 	
 	func showOperatingTime() {
