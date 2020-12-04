@@ -11,7 +11,7 @@ import os.log
 struct OfficeHours: Codable {
 	private let timeLimit: Float = 24.59
 	
-	var opening: Float = .zero {
+	var opening: Float {
 		didSet {
 			let value = abs(opening)
 
@@ -25,7 +25,7 @@ struct OfficeHours: Codable {
 		}
 	}
 	
-	var closing: Float = .zero {
+	var closing: Float {
 		didSet {
 			let value = abs(closing)
 			
@@ -39,7 +39,7 @@ struct OfficeHours: Codable {
 		}
 	}
 	
-	init(opening: Float, closing: Float) {
+	init(opening: Float = .zero, closing: Float = .zero) {
 		self.opening = opening
 		self.closing = closing
 	}

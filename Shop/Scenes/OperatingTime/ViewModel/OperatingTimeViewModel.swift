@@ -7,18 +7,22 @@
 
 import Foundation
 
-struct OperatingTimeViewModel: OperatingTimeViewModelInput {
+struct OperatingTimeViewModel {
 	private let router: OperatingTimeRouter
 	
-	var currentShopOperatingTime: OfficeHours?
+	var currentShopOperatingTime: OfficeHours
 	var currentShop: Shop?
 	let dataSource: DataSource = DataSource.shared
 	
 	init(container: Container) {
 		self.router = container.router
-		
-		self.currentShopOperatingTime = self.dataSource.currentShop?.officeHours
 		self.currentShop = self.dataSource.currentShop
+		
+		if let officeHours = self.currentShop?.officeHours {
+			self.currentShopOperatingTime = officeHours
+		} else {
+			currentShopOperatingTime = OfficeHours()
+		}
 	}
 	
 	func updateOpeningTimeOf(_ date: Date) {
@@ -59,5 +63,11 @@ struct OperatingTimeViewModel: OperatingTimeViewModelInput {
 extension OperatingTimeViewModel {
 	struct Container {
 		let router: OperatingTimeRouter
+	}
+}
+
+extension OperatingTimeViewModel: OperatingTimeViewModelInput {
+	func didLoad(completion: @escaping (OfficeHours) -> Void) {
+		completion(self.currentShopOperatingTime)
 	}
 }

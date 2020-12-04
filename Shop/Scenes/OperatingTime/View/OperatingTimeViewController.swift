@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OperatingTimeViewController: UIViewController, OperatingTimeViewModelOutput {
+class OperatingTimeViewController: UIViewController {
 	@IBOutlet weak var openingTime: UIDatePicker!
 	@IBOutlet weak var closingTime: UIDatePicker!
 	
@@ -26,12 +26,16 @@ class OperatingTimeViewController: UIViewController, OperatingTimeViewModelOutpu
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setupOperatingTime()
+		self.setupOutput()
 	}
 	
-	private func setupOperatingTime() {
-		guard let operatingTime = self.viewModel.currentShopOperatingTime else { return }
-		
+	private func setupOutput() {
+		self.viewModel.didLoad(completion: { operatingTime in
+			self.setupOperatingTime(operatingTime)
+		})
+	}
+	
+	private func setupOperatingTime(_ operatingTime: OfficeHours) {
 		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
 		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
 	}
@@ -62,4 +66,8 @@ extension OperatingTimeViewController {
 	struct Container {
 		let viewModel: OperatingTimeViewModel
 	}
+}
+
+extension OperatingTimeViewController: OperatingTimeViewModelOutput {
+	
 }
