@@ -30,8 +30,8 @@ class OperatingTimeViewController: UIViewController {
 	}
 	
 	private func setupOutput() {
-		self.viewModel.didLoad(completion: { operatingTime in
-			self.setupOperatingTime(operatingTime)
+		self.viewModel.didLoad(completion: { [weak self] (operatingTime) in
+			self?.setupOperatingTime(operatingTime)
 		})
 	}
 	
