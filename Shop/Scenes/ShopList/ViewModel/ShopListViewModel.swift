@@ -1,12 +1,8 @@
 import Foundation
 
-protocol ShopListViewModelInput {
-    
-}
+protocol ShopListViewModelInput { }
 
-protocol ShopListViewModelOutput {
-    
-}
+protocol ShopListViewModelOutput { }
 
 
 struct ShopListViewModel: ShopListViewModelInput {

@@ -1,12 +1,8 @@
 import Foundation
 
-protocol ShopDetailViewModelInput {
+protocol ShopDetailViewModelInput { } 
 
-}
-
-protocol ShopDetailViewModelOutput {
-    
-}
+protocol ShopDetailViewModelOutput { }
 
 struct ShopDetailViewModel: ShopDetailViewModelInput {
 	private let router: ShopDetailRouter

@@ -1,8 +1,6 @@
 import Foundation
 
-protocol OperatingTimeViewModelOutput {
-    
-}
+protocol OperatingTimeViewModelOutput { }
 
 protocol OperatingTimeViewModelInput {
     func didLoad(completion: @escaping (_ operatingTime: OfficeHours) -> Void)
