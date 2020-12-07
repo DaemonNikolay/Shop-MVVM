@@ -30,10 +30,13 @@ class DataSource {
 	
 	func shops() -> Array<Shop>? {
 		guard let shopIds: Array<String> = getShopIds() else { return nil }
-
-		let shops: Array<Shop> = shopIds.map { shopId in
-			shop(id: shopId)!
-		}
+        
+        var shops: Array<Shop> = []
+        shopIds.forEach { shopId in
+            if let shop = shop(id: shopId) {
+                shops.append(shop)
+            }
+        }
 			
 		return shops
 	}
