@@ -1,4 +1,4 @@
-issmport UIKit
+import UIKit
 
 class OperatingTimeViewController: UIViewController {
 	@IBOutlet weak var openingTime: UIDatePicker!

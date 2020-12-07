@@ -1,5 +1,13 @@
 import Foundation
 
+protocol ShopDetailViewModelInput {
+
+}
+
+protocol ShopDetailViewModelOutput {
+    
+}
+
 struct ShopDetailViewModel: ShopDetailViewModelInput {
 	private let router: ShopDetailRouter
 	private let dataSource: DataSource = DataSource.shared

@@ -1,5 +1,14 @@
 import Foundation
 
+protocol ShopListViewModelInput {
+    
+}
+
+protocol ShopListViewModelOutput {
+    
+}
+
+
 struct ShopListViewModel: ShopListViewModelInput {
 	private let router: ShopListRouter
 	

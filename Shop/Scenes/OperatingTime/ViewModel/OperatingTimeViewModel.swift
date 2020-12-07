@@ -1,5 +1,13 @@
 import Foundation
 
+protocol OperatingTimeViewModelOutput {
+    
+}
+
+protocol OperatingTimeViewModelInput {
+    func didLoad(completion: @escaping (_ operatingTime: OfficeHours) -> Void)
+}
+
 struct OperatingTimeViewModel {
 	private let router: OperatingTimeRouter
 	
@@ -41,7 +49,7 @@ struct OperatingTimeViewModel {
 	}
 	
 	func showShopList() {
-		router.showShopList()
+        router.showShopList()
 	}
 	
 	private func extractFormatTimeOf(_ date: Date) -> String {

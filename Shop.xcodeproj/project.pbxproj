@@ -36,12 +36,6 @@
 		734A16702574DE9D0003B555 /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A166F2574DE9D0003B555 /* Shop.swift */; };
 		734A16752574DF010003B555 /* ShopType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16742574DF010003B555 /* ShopType.swift */; };
 		734A16792574E02E0003B555 /* OfficeHours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734A16782574E02E0003B555 /* OfficeHours.swift */; };
-		734D6CCC257A096D006416FC /* ShopDetailViewModelInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CCB257A096D006416FC /* ShopDetailViewModelInput.swift */; };
-		734D6CCF257A0975006416FC /* ShopDetailViewModelOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CCE257A0975006416FC /* ShopDetailViewModelOutput.swift */; };
-		734D6CD3257A11DF006416FC /* OperatingTimeViewModelOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CD2257A11DF006416FC /* OperatingTimeViewModelOutput.swift */; };
-		734D6CD6257A11ED006416FC /* OperatingTimeViewModelInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CD5257A11ED006416FC /* OperatingTimeViewModelInput.swift */; };
-		734D6CDA257A1225006416FC /* ShopListViewModelInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CD9257A1225006416FC /* ShopListViewModelInput.swift */; };
-		734D6CDE257A1235006416FC /* ShopListViewModelOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 734D6CDD257A1235006416FC /* ShopListViewModelOutput.swift */; };
 		735FE3F325760F5C00C6E984 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FE3F225760F5C00C6E984 /* UserDefaults.swift */; };
 		735FE3F725760F9600C6E984 /* ObjectSavable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FE3F625760F9600C6E984 /* ObjectSavable.swift */; };
 		735FE3FC2576192B00C6E984 /* AutoFillDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 735FE3FB2576192B00C6E984 /* AutoFillDB.swift */; };
@@ -84,12 +78,6 @@
 		734A166F2574DE9D0003B555 /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		734A16742574DF010003B555 /* ShopType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopType.swift; sourceTree = "<group>"; };
 		734A16782574E02E0003B555 /* OfficeHours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfficeHours.swift; sourceTree = "<group>"; };
-		734D6CCB257A096D006416FC /* ShopDetailViewModelInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModelInput.swift; sourceTree = "<group>"; };
-		734D6CCE257A0975006416FC /* ShopDetailViewModelOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailViewModelOutput.swift; sourceTree = "<group>"; };
-		734D6CD2257A11DF006416FC /* OperatingTimeViewModelOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeViewModelOutput.swift; sourceTree = "<group>"; };
-		734D6CD5257A11ED006416FC /* OperatingTimeViewModelInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeViewModelInput.swift; sourceTree = "<group>"; };
-		734D6CD9257A1225006416FC /* ShopListViewModelInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewModelInput.swift; sourceTree = "<group>"; };
-		734D6CDD257A1235006416FC /* ShopListViewModelOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewModelOutput.swift; sourceTree = "<group>"; };
 		735FE3F225760F5C00C6E984 /* UserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		735FE3F625760F9600C6E984 /* ObjectSavable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectSavable.swift; sourceTree = "<group>"; };
 		735FE3FB2576192B00C6E984 /* AutoFillDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoFillDB.swift; sourceTree = "<group>"; };
@@ -194,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				7346989025774ECF00B55191 /* ShopListModule.swift */,
-				734D6CD8257A1208006416FC /* Protocols */,
 				734A164E2574BDB30003B555 /* ViewModel */,
 				734A164D2574BD9D0003B555 /* Router */,
 				734A16472574BD4A0003B555 /* View */,
@@ -206,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				73BEA2F92578BC1D00A42B68 /* ShopDetailModule.swift */,
-				734D6CCA257A0950006416FC /* Protocols */,
 				734A164F2574BDBA0003B555 /* ViewModel */,
 				734A164C2574BD980003B555 /* Router */,
 				734A16482574BD4F0003B555 /* View */,
@@ -218,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				73253AA02578EC52004D942C /* OperatingTimeModule.swift */,
-				734D6CD1257A11D8006416FC /* Protocols */,
 				734A16502574BDC00003B555 /* ViewModel */,
 				734A164B2574BD920003B555 /* Router */,
 				734A16492574BD530003B555 /* View */,
@@ -338,33 +323,6 @@
 				734A16782574E02E0003B555 /* OfficeHours.swift */,
 			);
 			path = Shop;
-			sourceTree = "<group>";
-		};
-		734D6CCA257A0950006416FC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				734D6CCB257A096D006416FC /* ShopDetailViewModelInput.swift */,
-				734D6CCE257A0975006416FC /* ShopDetailViewModelOutput.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		734D6CD1257A11D8006416FC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				734D6CD2257A11DF006416FC /* OperatingTimeViewModelOutput.swift */,
-				734D6CD5257A11ED006416FC /* OperatingTimeViewModelInput.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		734D6CD8257A1208006416FC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				734D6CD9257A1225006416FC /* ShopListViewModelInput.swift */,
-				734D6CDD257A1235006416FC /* ShopListViewModelOutput.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		735FE3F025760F4B00C6E984 /* UserDefaults */ = {
@@ -533,17 +491,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				734D6CCC257A096D006416FC /* ShopDetailViewModelInput.swift in Sources */,
 				734A16652574C8EB0003B555 /* ShopListViewModel.swift in Sources */,
 				73253AA12578EC52004D942C /* OperatingTimeModule.swift in Sources */,
 				734A16682574C8FB0003B555 /* ShopDetailRouter.swift in Sources */,
 				734A16792574E02E0003B555 /* OfficeHours.swift in Sources */,
-				734D6CD6257A11ED006416FC /* OperatingTimeViewModelInput.swift in Sources */,
 				735FE3F725760F9600C6E984 /* ObjectSavable.swift in Sources */,
 				734A16522574C4DB0003B555 /* OperatingTimeViewController.swift in Sources */,
 				734A162E2574AD670003B555 /* AppDelegate.swift in Sources */,
 				73253A9E2578EBD6004D942C /* OperatingTimeRoute.swift in Sources */,
-				734D6CCF257A0975006416FC /* ShopDetailViewModelOutput.swift in Sources */,
 				735FE3F325760F5C00C6E984 /* UserDefaults.swift in Sources */,
 				7370C6D72574E5E40008E85A /* DataSource.swift in Sources */,
 				734A16592574C5180003B555 /* OperatingTimeViewModel.swift in Sources */,
@@ -554,20 +509,17 @@
 				734A16752574DF010003B555 /* ShopType.swift in Sources */,
 				734698AD257759D700B55191 /* ShopListRoute.swift in Sources */,
 				73BEA2FA2578BC1D00A42B68 /* ShopDetailModule.swift in Sources */,
-				734D6CDE257A1235006416FC /* ShopListViewModelOutput.swift in Sources */,
 				734698B025775BB700B55191 /* ShopDetailRoute.swift in Sources */,
 				73469895257757AA00B55191 /* Animator.swift in Sources */,
 				735FE3FC2576192B00C6E984 /* AutoFillDB.swift in Sources */,
 				734A165C2574C8200003B555 /* ShopDetailViewController.swift in Sources */,
 				734A16702574DE9D0003B555 /* Shop.swift in Sources */,
 				7346989F257757E700B55191 /* Router.swift in Sources */,
-				734D6CD3257A11DF006416FC /* OperatingTimeViewModelOutput.swift in Sources */,
 				7346989B257757CA00B55191 /* Transition.swift in Sources */,
 				7346989125774ECF00B55191 /* ShopListModule.swift in Sources */,
 				734A166B2574C9020003B555 /* ShopDetailViewModel.swift in Sources */,
 				734A16622574C8DD0003B555 /* ShopListRouter.swift in Sources */,
 				734A16562574C4FE0003B555 /* OperatingTimeRouter.swift in Sources */,
-				734D6CDA257A1225006416FC /* ShopListViewModelInput.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
