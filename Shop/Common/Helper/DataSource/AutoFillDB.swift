@@ -1,10 +1,3 @@
-//
-//  AutoFillDB.swift
-//  Shop
-//
-//  Created by Nikulux on 01.12.2020.
-//
-
 import Foundation
 import Fakery
 

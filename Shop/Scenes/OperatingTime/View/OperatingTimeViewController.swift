@@ -1,11 +1,4 @@
-//
-//  OperatingTimeViewController.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
-import UIKit
+issmport UIKit
 
 class OperatingTimeViewController: UIViewController {
 	@IBOutlet weak var openingTime: UIDatePicker!

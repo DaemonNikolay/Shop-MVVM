@@ -1,10 +1,3 @@
-//
-//  PushTransition.swift
-//  Shop
-//
-//  Created by Nikulux on 02.12.2020.
-//
-
 import UIKit
 
 class PushTransition: NSObject {

@@ -1,10 +1,3 @@
-//
-//  ObjectSaveble.swift
-//  Shop
-//
-//  Created by Nikulux on 01.12.2020.
-//
-
 import Foundation
 
 /// https://medium.com/flawless-app-stories/save-custom-objects-into-userdefaults-using-codable-in-swift-5-1-protocol-oriented-approach-ae36175180d8
