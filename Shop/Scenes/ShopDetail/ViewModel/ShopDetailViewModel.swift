@@ -1,8 +1,15 @@
 import Foundation
+import UIKit
 
-protocol ShopDetailViewModelInput { } 
+protocol ShopDetailViewModelInput {
+    func didBackTap()
+    func didCellTap()
+}
 
-protocol ShopDetailViewModelOutput { }
+protocol ShopDetailViewModelOutput {
+    func rowsCount() -> Int
+    func fillCellBy(indexPath: IndexPath) -> UITableViewCell
+}
 
 struct ShopDetailViewModel {
 	private let router: ShopDetailRouter
@@ -82,7 +89,15 @@ struct ShopDetailViewModel {
 	}
 }
 
-extension ShopDetailViewModel: ShopDetailViewModelInput { }
+extension ShopDetailViewModel: ShopDetailViewModelInput {
+    func didBackTap() {
+        showShopList()
+    }
+    
+    func didCellTap() {
+        showOperatingTime()
+    }
+}
 
 // MARK: - DI container
 

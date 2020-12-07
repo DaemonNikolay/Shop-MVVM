@@ -1,6 +1,6 @@
 import UIKit
 
-class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
+class ShopDetailViewController: UIViewController {
 	
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
@@ -27,11 +27,31 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	}
 
 	@IBAction func backTap(_ sender: UIButton) {
-		viewModel.showShopList()
+        viewModel.didBackTap()
 	}
 }
 
-extension ShopDetailViewModelOutput { }
+extension ShopDetailViewController: ShopDetailViewModelOutput {
+    func fillCellBy(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
+                                                           for: indexPath) as? ShopDetailCell else {
+            return UITableViewCell()
+        }
+        
+        let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
+        if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
+            cell.isOfficeHours = true
+        }
+        
+        cell.textLabel?.text = content
+        
+        return cell
+    }
+    
+    func rowsCount() -> Int {
+        Shop.DetailNames.allCases.count
+    }
+}
 
 // MARK: - DI container
 
@@ -45,22 +65,13 @@ extension ShopDetailViewController {
 
 extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		Shop.DetailNames.allCases.count
+        rowsCount()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
-                                                           for: indexPath) as? ShopDetailCell else {
-            return UITableViewCell()
-        }
-		
-		let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
-		if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
-            cell.isOfficeHours = true
-		}
-		
-		cell.textLabel?.text = content
-		
+        
+        let cell = fillCellBy(indexPath: indexPath)
+        
 		return cell
 	}
 	
@@ -75,6 +86,6 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	private func actionOnCellTap() {
-		viewModel.showOperatingTime()
+        viewModel.didCellTap()
 	}
 }
