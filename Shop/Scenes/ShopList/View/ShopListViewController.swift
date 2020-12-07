@@ -16,7 +16,7 @@ class ShopListViewController: UIViewController, ShopListViewModelOutput {
 	
 	
 	init (container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -27,13 +27,11 @@ class ShopListViewController: UIViewController, ShopListViewModelOutput {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.tableShops.register(UITableViewCell.self,
-								 forCellReuseIdentifier: self.cellReuseIdentifier)
+		tableShops.register(UITableViewCell.self,
+                            forCellReuseIdentifier: cellReuseIdentifier)
 	}
 	
 	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
-		let viewModel = self.viewModel
-		
 		let startIndex = viewModel.shops.startIndex
 		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)
 		let key = viewModel.shops.keys[index]
@@ -41,7 +39,6 @@ class ShopListViewController: UIViewController, ShopListViewModelOutput {
 		return key
 	}
 }
-
 
 extension ShopListViewController {
 	struct Container {
@@ -54,29 +51,29 @@ extension ShopListViewController {
 
 extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
-		self.viewModel.shops.count
+		viewModel.shops.count
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		let key: String = self.keyOfShopOffsetBy(section)
+		let key: String = keyOfShopOffsetBy(section)
 		
-		return self.viewModel.shops[key]?.count ?? 0
+		return viewModel.shops[key]?.count ?? 0
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let keysCount = self.viewModel.shops.keys.count
+		let keysCount = viewModel.shops.keys.count
 		if section < keysCount  {
-			return self.keyOfShopOffsetBy(section)
+			return keyOfShopOffsetBy(section)
 		}
 		
 		return nil
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell: UITableViewCell = self.tableShops.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier, for: indexPath)
+		let cell: UITableViewCell = tableShops.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
 		
-		let key = self.keyOfShopOffsetBy(indexPath.section)
-		guard let shops = self.viewModel.shops[key] else {
+		let key = keyOfShopOffsetBy(indexPath.section)
+		guard let shops = viewModel.shops[key] else {
 			cell.textLabel?.text = "-"
 			
 			return cell
@@ -90,8 +87,8 @@ extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
 		
-		let key = self.keyOfShopOffsetBy(indexPath.section)
+		let key = keyOfShopOffsetBy(indexPath.section)
 		
-		self.viewModel.showShopDetail(shopName: name, shopType: key)
+		viewModel.showShopDetail(shopName: name, shopType: key)
 	}
 }

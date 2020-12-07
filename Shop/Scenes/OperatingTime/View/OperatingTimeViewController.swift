@@ -14,7 +14,7 @@ class OperatingTimeViewController: UIViewController {
 	private var viewModel: OperatingTimeViewModel
 	
 	init (container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -26,18 +26,18 @@ class OperatingTimeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setupOutput()
+		setupOutput()
 	}
 	
 	private func setupOutput() {
-		self.viewModel.didLoad(completion: { [weak self] (operatingTime) in
+		viewModel.didLoad(completion: { [weak self] (operatingTime) in
 			self?.setupOperatingTime(operatingTime)
 		})
 	}
 	
 	private func setupOperatingTime(_ operatingTime: OfficeHours) {
-		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
-		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
+		openingTime.date = extractDateFrom(operatingTime.opening)
+		closingTime.date = extractDateFrom(operatingTime.closing)
 	}
 	
 	private func extractDateFrom(_ time: Float) -> Date {
@@ -50,15 +50,15 @@ class OperatingTimeViewController: UIViewController {
 	}
 	
 	@IBAction func openingTimeChanged(_ sender: UIDatePicker) {
-		self.viewModel.updateOpeningTimeOf(sender.date)
+		viewModel.updateOpeningTimeOf(sender.date)
 	}
 	
 	@IBAction func closingTimeChanged(_ sender: UIDatePicker) {
-		self.viewModel.updateClosingTimeOf(sender.date)
+		viewModel.updateClosingTimeOf(sender.date)
 	}
 	
 	@IBAction func saveTap(_ sender: UIButton) {
-		self.viewModel.updateCurrentShop()
+		viewModel.updateCurrentShop()
 	}
 }
 
@@ -68,6 +68,4 @@ extension OperatingTimeViewController {
 	}
 }
 
-extension OperatingTimeViewController: OperatingTimeViewModelOutput {
-	
-}
+extension OperatingTimeViewController: OperatingTimeViewModelOutput { }

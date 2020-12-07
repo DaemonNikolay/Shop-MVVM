@@ -15,8 +15,8 @@ struct ShopListViewModel: ShopListViewModelInput {
 	var shops: ShopData = [:]
 	
 	init(container: Container) {
-		self.router = container.router
-		self.shops = self.shopsInit()
+		router = container.router
+		shops = shopsInit()
 	}
 	
 	
@@ -39,30 +39,30 @@ struct ShopListViewModel: ShopListViewModelInput {
 	}
 	
 	func shop(name: String, key: String) -> Shop? {
-		let shop = self.shops[key]?.first(where: { $0.name == name })
+		let shop = shops[key]?.first(where: { $0.name == name })
 		
 		return shop
 	}
 	
 	func showShopDetail(shopName: String, shopType: String) {
-		guard let shop = self.shop(name: shopName, key: shopType) else { return	}
+		guard let shop = shop(name: shopName, key: shopType) else { return	}
 		
 		let dataSource = DataSource.shared
 		dataSource.currentShop = shop
 		
 		if !shop.isNearestShop {
-			self.transitionToShopDetail()
+			transitionToShopDetail()
 		} else {
-			self.transitionToShopOperatingTime()
+			transitionToShopOperatingTime()
 		}
 	}
 	
 	private func transitionToShopOperatingTime() {
-		self.router.showOperatingTime()
+		router.showOperatingTime()
 	}
 	
 	private func transitionToShopDetail() {
-		self.router.showShopDetail()
+		router.showShopDetail()
 	}
 }
 

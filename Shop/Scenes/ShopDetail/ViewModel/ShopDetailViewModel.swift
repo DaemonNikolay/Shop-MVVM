@@ -13,14 +13,13 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 	
 	let currentShop: Shop?
 	
-	
 	init(container: Container) {
-		self.router = container.router
-		self.currentShop = self.dataSource.currentShop
+		router = container.router
+		currentShop = dataSource.currentShop
 	}
 	
 	func formatPropertyOfShopBy(_ index: Int) -> (String, Shop.DetailNames?) {
-		guard let currentShop = self.currentShop else { return ("-", nil) }
+		guard let currentShop = currentShop else { return ("-", nil) }
 		
 		let key: Shop.DetailNames = Shop.DetailNames.allCases[index]
 		var value: String
@@ -42,25 +41,25 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 	}
 	
 	func showOperatingTime() {
-		self.router.showOperatingTime()
+		router.showOperatingTime()
 	}
 	
 	func showShopList() {
-		self.router.showShopList()
+		router.showShopList()
 	}
 	
 	func updateShop(shopDetailType: Shop.DetailNames, value: String, completion: @escaping () -> Void) {
 		switch shopDetailType {
 		case .name:
-			self.updateNameOfShop(value)
+			updateNameOfShop(value)
 		case .employeesNumber:
 			guard let employees = UInt(value) else { return }
 			
-			self.updateEmployeesNumberOfShop(employees)
+			updateEmployeesNumberOfShop(employees)
 		case .type:
 			guard let type = ShopType(rawValue: value) else { return }
 			
-			self.updateTypeOfShop(type)
+			updateTypeOfShop(type)
 		default:
 			break
 		}
@@ -69,20 +68,20 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 	}
 	
 	func updateNameOfShop(_ name: String) {
-		self.currentShop?.name = name
+		currentShop?.name = name
 	}
 	
 	func updateEmployeesNumberOfShop(_ number: UInt) {
-		self.currentShop?.employeesNumber = number
+		currentShop?.employeesNumber = number
 	}
 	
 	func updateTypeOfShop(_ type: ShopType) {
-		self.currentShop?.type = type
+		currentShop?.type = type
 	}
 	
 	func saveShop(completion: @escaping () -> Void) {
-		if let shop = self.currentShop {
-			self.dataSource.updateShop(shop: shop)
+		if let shop = currentShop {
+			dataSource.updateShop(shop: shop)
 		}
 		
 		completion()

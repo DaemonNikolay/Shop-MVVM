@@ -18,7 +18,7 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 
 	
 	init(container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -30,14 +30,14 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.settingsTable.register(UITableViewCell.self,
-									forCellReuseIdentifier: self.cellReuseIdentifier)
+		settingsTable.register(UITableViewCell.self,
+                               forCellReuseIdentifier: cellReuseIdentifier)
 	}
 
 	
 	@IBAction func saveTap(_ sender: UIButton) {
-		self.viewModel.saveShop {
-			self.viewModel.showShopList()
+		viewModel.saveShop { [weak self] in
+            self?.viewModel.showShopList()
 		}
 	}
 }
@@ -57,10 +57,10 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = self.settingsTable.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier,
-														  for: indexPath)
+		let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
+                                                     for: indexPath)
 		
-		let (content, shopDetailKey) = self.viewModel.formatPropertyOfShopBy(indexPath.row)
+		let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
 		
 		if let shopDetailKey = shopDetailKey {
 			if shopDetailKey == .officeHours {
@@ -76,11 +76,11 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let cell = tableView.cellForRow(at: indexPath)
 		if cell?.tag == 1 {
-			self.actionOnCellTap()
+			actionOnCellTap()
 		}
 	}
 	
 	private func actionOnCellTap() {
-		self.viewModel.showOperatingTime()
+		viewModel.showOperatingTime()
 	}
 }

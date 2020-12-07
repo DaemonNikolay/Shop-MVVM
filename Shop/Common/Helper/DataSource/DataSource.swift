@@ -17,29 +17,29 @@ class DataSource {
 	private let dataSource: UserDefaults
 	
 	private init() {
-		self.dataSource = UserDefaults.standard
+		dataSource = UserDefaults.standard
 	}
 	
 	var currentShop: Shop?
 	
 	var shopCount: Int {
 		get {
-			let shopIds = self.getShopIds()
+			let shopIds = getShopIds()
 			
 			return shopIds?.count ?? 0
 		}
 	}
 	
 	func addShop(shop: Shop) {
-		try? self.dataSource.setObject(shop, forKey: shop.id.description)
-		self.updateShopIds(id: shop.id.description)
+		try? dataSource.setObject(shop, forKey: shop.id.description)
+		updateShopIds(id: shop.id.description)
 	}
 	
 	func shops() -> Array<Shop>? {
-		guard let shopIds: Array<String> = self.getShopIds() else { return nil }
+		guard let shopIds: Array<String> = getShopIds() else { return nil }
 
 		let shops: Array<Shop> = shopIds.map { shopId in
-			self.shop(id: shopId)!
+			shop(id: shopId)!
 		}
 			
 		return shops
@@ -52,27 +52,27 @@ class DataSource {
 	}
 	
 	func updateShop(shop: Shop) {
-		guard let _ = self.shop(id: shop.id.description) else { return }
+        guard let _ = self.shop(id: shop.id.description) else { return }
 		
-		try? self.dataSource.setObject(shop, forKey: shop.id.description)
+		try? dataSource.setObject(shop, forKey: shop.id.description)
 	}
 	
 	private func getShopIds() -> Array<String>? {
 		let userDefaults = UserDefaults.standard
-		let shopIds = userDefaults.array(forKey: self.keyShopIds) as? Array<String>
+		let shopIds = userDefaults.array(forKey: keyShopIds) as? Array<String>
 		
 		return shopIds
 	}
 	
 	private func updateShopIds(id: String) {
-		guard var shopIds = self.getShopIds() else {
+		guard var shopIds = getShopIds() else {
 			let shopIds = [id]
-			self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+			dataSource.setValue(shopIds, forKey: keyShopIds)
 			
 			return
 		}
 		
 		shopIds.append(id)
-		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+		dataSource.setValue(shopIds, forKey: keyShopIds)
 	}
 }

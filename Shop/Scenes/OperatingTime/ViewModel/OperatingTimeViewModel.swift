@@ -15,40 +15,40 @@ struct OperatingTimeViewModel {
 	let dataSource: DataSource = DataSource.shared
 	
 	init(container: Container) {
-		self.router = container.router
-		self.currentShop = self.dataSource.currentShop
+		router = container.router
+		currentShop = dataSource.currentShop
 		
-		if let officeHours = self.currentShop?.officeHours {
-			self.currentShopOperatingTime = officeHours
+		if let officeHours = currentShop?.officeHours {
+			currentShopOperatingTime = officeHours
 		} else {
 			currentShopOperatingTime = OfficeHours()
 		}
 	}
 	
 	func updateOpeningTimeOf(_ date: Date) {
-		let timeFormatString = self.extractFormatTimeOf(date)
+		let timeFormatString = extractFormatTimeOf(date)
 		if let openingTime: Float = Float(timeFormatString) {
-			self.currentShop?.officeHours.opening = openingTime
+			currentShop?.officeHours.opening = openingTime
 		}
 	}
 	
 	func updateClosingTimeOf(_ date: Date) {
-		let timeFormatString = self.extractFormatTimeOf(date)
+		let timeFormatString = extractFormatTimeOf(date)
 		if let closingTime: Float = Float(timeFormatString) {
-			self.currentShop?.officeHours.closing = closingTime
+			currentShop?.officeHours.closing = closingTime
 		}
 	}
 	
 	func updateCurrentShop() {
-		if let shop = self.currentShop {
-			self.dataSource.updateShop(shop: shop)
+		if let shop = currentShop {
+			dataSource.updateShop(shop: shop)
 		}
 		
-		self.showShopList()
+		showShopList()
 	}
 	
 	func showShopList() {
-		self.router.showShopList()
+		router.showShopList()
 	}
 	
 	private func extractFormatTimeOf(_ date: Date) -> String {
@@ -68,6 +68,6 @@ extension OperatingTimeViewModel {
 
 extension OperatingTimeViewModel: OperatingTimeViewModelInput {
 	func didLoad(completion: @escaping (OfficeHours) -> Void) {
-		completion(self.currentShopOperatingTime)
+		completion(currentShopOperatingTime)
 	}
 }

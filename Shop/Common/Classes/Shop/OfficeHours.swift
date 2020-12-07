@@ -40,7 +40,7 @@ struct OfficeHours: Codable {
 	}
 	
 	init(opening: Float = .zero, closing: Float = .zero) {
-		self.opening = opening
+        self.opening = opening
 		self.closing = closing
 	}
 }
