@@ -1,5 +1,7 @@
 import Foundation
 
+/// MARK: - Get/Set for objects
+
 /// https://medium.com/flawless-app-stories/save-custom-objects-into-userdefaults-using-codable-in-swift-5-1-protocol-oriented-approach-ae36175180d8
 extension UserDefaults: ObjectSavable {
 	func setObject<Object>(_ object: Object, forKey: String) throws where Object: Encodable {
@@ -23,7 +25,6 @@ extension UserDefaults: ObjectSavable {
 		}
 	}
 }
-
 
 enum ObjectSavableError: String, LocalizedError {
 	case unableToEncode = "Unable to encode object into data"

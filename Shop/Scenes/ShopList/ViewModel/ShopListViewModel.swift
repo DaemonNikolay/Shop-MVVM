@@ -4,7 +4,6 @@ protocol ShopListViewModelInput { }
 
 protocol ShopListViewModelOutput { }
 
-
 struct ShopListViewModel: ShopListViewModelInput {
 	private let router: ShopListRouter
 	
@@ -16,7 +15,6 @@ struct ShopListViewModel: ShopListViewModelInput {
 		router = container.router
 		shops = shopsInit()
 	}
-	
 	
 	func shopsInit() -> ShopData {
 		let dataSource = DataSource.shared
@@ -63,6 +61,8 @@ struct ShopListViewModel: ShopListViewModelInput {
 		router.showShopDetail()
 	}
 }
+
+// MARK: - DI container
 
 extension ShopListViewModel {
 	struct Container {

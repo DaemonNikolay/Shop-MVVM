@@ -1,6 +1,7 @@
 import UIKit
 
 class OperatingTimeViewController: UIViewController {
+    
 	@IBOutlet weak var openingTime: UIDatePicker!
 	@IBOutlet weak var closingTime: UIDatePicker!
 	
@@ -54,6 +55,8 @@ class OperatingTimeViewController: UIViewController {
 		viewModel.updateCurrentShop()
 	}
 }
+
+// MARK: - DI container
 
 extension OperatingTimeViewController {
 	struct Container {

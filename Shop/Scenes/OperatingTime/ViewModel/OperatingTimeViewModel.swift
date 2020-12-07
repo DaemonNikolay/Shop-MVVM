@@ -59,6 +59,8 @@ struct OperatingTimeViewModel {
 	}
 }
 
+// MARK: - DI container
+
 extension OperatingTimeViewModel {
 	struct Container {
 		let router: OperatingTimeRouter

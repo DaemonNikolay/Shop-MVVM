@@ -33,12 +33,13 @@ class ShopListViewController: UIViewController, ShopListViewModelOutput {
 	}
 }
 
+// MARK: - DI container
+
 extension ShopListViewController {
 	struct Container {
 		let viewModel: ShopListViewModel
 	}
 }
-
 
 // MARK: - TableView
 

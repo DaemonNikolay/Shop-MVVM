@@ -9,7 +9,6 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	
 	private let cellReuseIdentifier: String = "settingCell"
 
-	
 	init(container: Container) {
 		viewModel = container.viewModel
 		
@@ -27,7 +26,6 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
                                forCellReuseIdentifier: cellReuseIdentifier)
 	}
 
-	
 	@IBAction func saveTap(_ sender: UIButton) {
 		viewModel.saveShop { [weak self] in
             self?.viewModel.showShopList()
@@ -35,12 +33,13 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	}
 }
 
+// MARK: - DI container
+
 extension ShopDetailViewController {
 	struct Container {
 		let viewModel: ShopDetailViewModel
 	}
 }
-
 
 // MARK: - TableView
 

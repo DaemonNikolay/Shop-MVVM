@@ -27,6 +27,8 @@ class Shop: Codable {
 	}
 }
 
+// MARK: - Format names
+
 extension Shop {
 	enum DetailNames: String, CaseIterable {
 		case name = "Name"

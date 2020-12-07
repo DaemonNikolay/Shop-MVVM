@@ -85,6 +85,8 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 	}
 }
 
+// MARK: - DI container
+
 extension ShopDetailViewModel {
 	struct Container {
 		let router: ShopDetailRouter
