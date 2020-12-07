@@ -80,14 +80,6 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 	func updateTypeOfShop(_ type: ShopType) {
 		currentShop?.type = type
 	}
-	
-	func saveShop(completion: @escaping () -> Void) {
-		if let shop = currentShop {
-			dataSource.updateShop(shop: shop)
-		}
-		
-		completion()
-	}
 }
 
 // MARK: - DI container

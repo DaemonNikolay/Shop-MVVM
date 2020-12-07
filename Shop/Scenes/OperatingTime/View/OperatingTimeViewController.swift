@@ -54,6 +54,9 @@ class OperatingTimeViewController: UIViewController {
 	@IBAction func saveTap(_ sender: UIButton) {
 		viewModel.updateCurrentShop()
 	}
+    @IBAction func backTap(_ sender: Any) {
+        viewModel.showShopList()
+    }
 }
 
 // MARK: - DI container

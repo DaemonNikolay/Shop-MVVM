@@ -26,10 +26,8 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
                                forCellReuseIdentifier: cellReuseIdentifier)
 	}
 
-	@IBAction func saveTap(_ sender: UIButton) {
-		viewModel.saveShop { [weak self] in
-            self?.viewModel.showShopList()
-		}
+	@IBAction func backTap(_ sender: UIButton) {
+		viewModel.showShopList()
 	}
 }
 
