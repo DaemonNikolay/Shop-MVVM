@@ -8,7 +8,7 @@ class Shop: Codable {
 	var openingDate: Date
 	var name: String
 	var officeHours: OfficeHours
-	var isNearestShop: Bool
+	var isNearestShop: Bool?
 
 	init(type: ShopType,
 		 employeesNumber: UInt,

@@ -31,10 +31,10 @@ class DataSource {
 	func shops() -> Array<Shop>? {
 		guard let shopIds: Array<String> = getShopIds() else { return nil }
         
-        var shops: Array<Shop> = []
+        var shops: Array<Shop>?
         shopIds.forEach { shopId in
             if let shop = shop(id: shopId) {
-                shops.append(shop)
+                shops?.append(shop)
             }
         }
 			
@@ -52,6 +52,30 @@ class DataSource {
 		
 		try? dataSource.setObject(shop, forKey: shop.id.description)
 	}
+    
+    func validShopsOnExistIsNearest() -> Bool {
+        guard let shops = shops() else {
+            return false
+        }
+            
+        if let _ = shops.first(where: { $0.isNearestShop == nil }) {
+            return false
+        }
+        
+        return true
+    }
+    
+    func removeAllShops() {
+        guard let shopIds = getShopIds() else {
+            return
+        }
+        
+        shopIds.forEach { shopId in
+            dataSource.removeObject(forKey: shopId)
+        }
+        
+        dataSource.removeObject(forKey: keyShopIds)
+    }
 	
 	private func getShopIds() -> Array<String>? {
 		let userDefaults = UserDefaults.standard

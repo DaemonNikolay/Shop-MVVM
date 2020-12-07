@@ -41,12 +41,12 @@ struct ShopListViewModel: ShopListViewModelInput {
 	}
 	
 	func showShopDetail(shopName: String, shopType: String) {
-		guard let shop = shop(name: shopName, key: shopType) else { return	}
-		
+        guard let shop = shop(name: shopName, key: shopType), let isNearestShop = shop.isNearestShop else { return	}
+
 		let dataSource = DataSource.shared
 		dataSource.currentShop = shop
 		
-		if !shop.isNearestShop {
+        if !isNearestShop {
 			transitionToShopDetail()
 		} else {
 			transitionToShopOperatingTime()
