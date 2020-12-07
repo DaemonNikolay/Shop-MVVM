@@ -4,7 +4,7 @@ protocol ShopDetailViewModelInput { }
 
 protocol ShopDetailViewModelOutput { }
 
-struct ShopDetailViewModel: ShopDetailViewModelInput {
+struct ShopDetailViewModel {
 	private let router: ShopDetailRouter
 	private let dataSource: DataSource = DataSource.shared
 	
@@ -81,6 +81,8 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 		currentShop?.type = type
 	}
 }
+
+extension ShopDetailViewModel: ShopDetailViewModelInput { }
 
 // MARK: - DI container
 

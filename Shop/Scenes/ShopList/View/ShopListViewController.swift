@@ -33,6 +33,8 @@ class ShopListViewController: UIViewController, ShopListViewModelOutput {
 	}
 }
 
+extension ShopDetailViewModelOutput { }
+
 // MARK: - DI container
 
 extension ShopListViewController {

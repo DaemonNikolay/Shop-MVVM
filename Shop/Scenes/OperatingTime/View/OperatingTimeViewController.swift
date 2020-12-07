@@ -59,6 +59,8 @@ class OperatingTimeViewController: UIViewController {
     }
 }
 
+extension OperatingTimeViewController: OperatingTimeViewModelOutput { }
+
 // MARK: - DI container
 
 extension OperatingTimeViewController {
@@ -66,5 +68,3 @@ extension OperatingTimeViewController {
 		let viewModel: OperatingTimeViewModel
 	}
 }
-
-extension OperatingTimeViewController: OperatingTimeViewModelOutput { }

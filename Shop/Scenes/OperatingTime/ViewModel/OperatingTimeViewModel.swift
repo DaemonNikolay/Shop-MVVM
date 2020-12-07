@@ -59,16 +59,16 @@ struct OperatingTimeViewModel {
 	}
 }
 
+extension OperatingTimeViewModel: OperatingTimeViewModelInput {
+    func didLoad(completion: @escaping (OfficeHours) -> Void) {
+        completion(currentShopOperatingTime)
+    }
+}
+
 // MARK: - DI container
 
 extension OperatingTimeViewModel {
 	struct Container {
 		let router: OperatingTimeRouter
-	}
-}
-
-extension OperatingTimeViewModel: OperatingTimeViewModelInput {
-	func didLoad(completion: @escaping (OfficeHours) -> Void) {
-		completion(currentShopOperatingTime)
 	}
 }

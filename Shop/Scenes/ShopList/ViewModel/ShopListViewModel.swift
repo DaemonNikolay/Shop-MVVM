@@ -62,6 +62,8 @@ struct ShopListViewModel: ShopListViewModelInput {
 	}
 }
 
+extension ShopDetailViewModelInput { }
+
 // MARK: - DI container
 
 extension ShopListViewModel {
