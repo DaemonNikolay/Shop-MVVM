@@ -17,24 +17,22 @@ class DataSource {
 	
 	var shopCount: Int {
 		get {
-			let shopIds = getShopIds()
-			
-			return shopIds?.count ?? 0
+            shops()?.count ?? 0
 		}
 	}
 	
 	func addShop(shop: Shop) {
-		try? dataSource.setObject(shop, forKey: shop.id.description)
+		let fd = try? dataSource.setObject(shop, forKey: shop.id.description)
 		updateShopIds(id: shop.id.description)
 	}
 	
 	func shops() -> Array<Shop>? {
 		guard let shopIds: Array<String> = getShopIds() else { return nil }
         
-        var shops: Array<Shop>?
+        var shops: Array<Shop> = []
         shopIds.forEach { shopId in
             if let shop = shop(id: shopId) {
-                shops?.append(shop)
+                shops.append(shop)
             }
         }
 			
@@ -55,7 +53,7 @@ class DataSource {
     
     func validShopsOnExistIsNearest() -> Bool {
         guard let shops = shops() else {
-            return false
+            return true
         }
             
         if let _ = shops.first(where: { $0.isNearestShop == nil }) {
