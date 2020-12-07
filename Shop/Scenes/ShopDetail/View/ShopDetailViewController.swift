@@ -22,7 +22,7 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		settingsTable.register(UITableViewCell.self,
+		settingsTable.register(ShopDetailCell.self,
                                forCellReuseIdentifier: cellReuseIdentifier)
 	}
 
@@ -47,13 +47,14 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
-                                                     for: indexPath)
+		guard let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
+                                                           for: indexPath) as? ShopDetailCell else {
+            return UITableViewCell()
+        }
 		
 		let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
-		
 		if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
-            cell.tag = 1
+            cell.isOfficeHours = true
 		}
 		
 		cell.textLabel?.text = content
@@ -62,10 +63,13 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath)
-		if cell?.tag == 1 {
-			actionOnCellTap()
-		}
+        guard let cell = tableView.cellForRow(at: indexPath) as? ShopDetailCell else {
+            return
+        }
+        
+        if cell.isOfficeHours == true {
+            actionOnCellTap()
+        }
 	}
 	
 	private func actionOnCellTap() {
