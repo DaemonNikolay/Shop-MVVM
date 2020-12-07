@@ -54,10 +54,8 @@ extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 		
 		let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
 		
-		if let shopDetailKey = shopDetailKey {
-			if shopDetailKey == .officeHours {
-				cell.tag = 1
-			}
+		if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
+            cell.tag = 1
 		}
 		
 		cell.textLabel?.text = content

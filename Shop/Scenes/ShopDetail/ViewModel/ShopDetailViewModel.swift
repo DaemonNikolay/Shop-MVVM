@@ -24,12 +24,16 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 		switch key {
 		case .employeesNumber:
 			value = currentShop.employeesNumber.description
+			
 		case .type:
 			value = currentShop.type.rawValue
+
 		case .openingDate:
 			value = currentShop.openingDate.description
+
 		case .name:
 			value = currentShop.name
+
 		case .officeHours:
 			value = "\(currentShop.officeHours.opening):\(currentShop.officeHours.closing)"
 		}
@@ -49,14 +53,15 @@ struct ShopDetailViewModel: ShopDetailViewModelInput {
 		switch shopDetailType {
 		case .name:
 			updateNameOfShop(value)
+
 		case .employeesNumber:
 			guard let employees = UInt(value) else { return }
-			
 			updateEmployeesNumberOfShop(employees)
+
 		case .type:
 			guard let type = ShopType(rawValue: value) else { return }
-			
 			updateTypeOfShop(type)
+
 		default:
 			break
 		}
