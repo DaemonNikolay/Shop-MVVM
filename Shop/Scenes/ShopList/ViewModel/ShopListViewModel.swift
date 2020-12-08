@@ -1,10 +1,23 @@
 import Foundation
+import UIKit
 
-protocol ShopListViewModelInput { }
+// MARK: - Protocols
 
-protocol ShopListViewModelOutput { }
+protocol ShopListViewModelInput {
+	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath)
+	func keyOfShopOffsetBy(_ offsetBy: Int) -> String
+}
 
-struct ShopListViewModel: ShopListViewModelInput {
+protocol ShopListViewModelOutput {
+	func rowsCount() -> Int
+	func numberOfRowsIn(_ section: Int) -> Int
+	func fillCellIn(_ indexPath: IndexPath) -> UITableViewCell
+	func titleForHeaderIn(_ section: Int) -> String?
+}
+
+// MARK: - ViewModel
+
+struct ShopListViewModel {
 	private let router: ShopListRouter
 	
 	typealias ShopData = [String: [Shop]]
@@ -62,7 +75,25 @@ struct ShopListViewModel: ShopListViewModelInput {
 	}
 }
 
-extension ShopDetailViewModelInput { }
+// MARK: - Input
+
+extension ShopListViewModel: ShopListViewModelInput {
+	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath) {
+		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
+		
+		let key = keyOfShopOffsetBy(indexPath.section)
+		
+		showShopDetail(shopName: name, shopType: key)
+	}
+	
+	func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
+		let startIndex = shops.startIndex
+		let index = shops.index(startIndex, offsetBy: offsetBy)
+		let key = shops.keys[index]
+		
+		return key
+	}
+}
 
 // MARK: - DI container
 

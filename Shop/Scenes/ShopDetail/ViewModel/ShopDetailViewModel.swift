@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 
+// MARK: - Protocols
+
 protocol ShopDetailViewModelInput {
     func didBackTap()
     func didCellTap()
@@ -10,6 +12,8 @@ protocol ShopDetailViewModelOutput {
     func rowsCount() -> Int
     func fillCellBy(indexPath: IndexPath) -> UITableViewCell
 }
+
+// MARK: - ViewModel
 
 struct ShopDetailViewModel {
 	private let router: ShopDetailRouter
@@ -88,6 +92,8 @@ struct ShopDetailViewModel {
 		currentShop?.type = type
 	}
 }
+
+// MARK: - Input
 
 extension ShopDetailViewModel: ShopDetailViewModelInput {
     func didBackTap() {

@@ -9,6 +9,8 @@ class ShopDetailViewController: UIViewController {
 	
 	private let cellReuseIdentifier: String = "settingCell"
 
+	// MARK: - Initialize
+	
 	init(container: Container) {
 		viewModel = container.viewModel
 		
@@ -19,17 +21,23 @@ class ShopDetailViewController: UIViewController {
 		fatalError("Unable to use init with coder")
 	}
 	
+	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		settingsTable.register(ShopDetailCell.self,
                                forCellReuseIdentifier: cellReuseIdentifier)
 	}
+	
+	// MARK: - Actions
 
 	@IBAction func backTap(_ sender: UIButton) {
         viewModel.didBackTap()
 	}
 }
+
+// MARK: - Output
 
 extension ShopDetailViewController: ShopDetailViewModelOutput {
     func fillCellBy(indexPath: IndexPath) -> UITableViewCell {
