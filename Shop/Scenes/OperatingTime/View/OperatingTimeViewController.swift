@@ -1,20 +1,16 @@
-//
-//  OperatingTimeViewController.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import UIKit
 
 class OperatingTimeViewController: UIViewController {
+    
 	@IBOutlet weak var openingTime: UIDatePicker!
 	@IBOutlet weak var closingTime: UIDatePicker!
 	
 	private var viewModel: OperatingTimeViewModel
 	
+	// MARK: - Initialize
+	
 	init (container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -23,51 +19,52 @@ class OperatingTimeViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setupOutput()
+		setupController()
 	}
 	
-	private func setupOutput() {
-		self.viewModel.didLoad(completion: { [weak self] (operatingTime) in
+	private func setupController() {
+		viewModel.didLoad(completion: { [weak self] (operatingTime) in
 			self?.setupOperatingTime(operatingTime)
 		})
 	}
 	
 	private func setupOperatingTime(_ operatingTime: OfficeHours) {
-		self.openingTime.date = self.extractDateFrom(operatingTime.opening)
-		self.closingTime.date = self.extractDateFrom(operatingTime.closing)
+		openingTime.date = viewModel.extractDateFrom(operatingTime.opening)
+		closingTime.date = viewModel.extractDateFrom(operatingTime.closing)
 	}
 	
-	private func extractDateFrom(_ time: Float) -> Date {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "HH.mm"
-
-		guard let date = dateFormatter.date(from: time.description) else { return Date() }
-		
-		return date
-	}
+	// MARK: - Actions
 	
 	@IBAction func openingTimeChanged(_ sender: UIDatePicker) {
-		self.viewModel.updateOpeningTimeOf(sender.date)
+		viewModel.didChangeOpeningTime(sender)
 	}
 	
 	@IBAction func closingTimeChanged(_ sender: UIDatePicker) {
-		self.viewModel.updateClosingTimeOf(sender.date)
+		viewModel.didChangeClosingTime(sender)
 	}
 	
 	@IBAction func saveTap(_ sender: UIButton) {
-		self.viewModel.updateCurrentShop()
+		viewModel.didSaveTap()
 	}
+	
+    @IBAction func backTap(_ sender: UIButton) {
+        viewModel.backTap()
+    }
 }
+
+// MARK: - Output
+
+extension OperatingTimeViewController: OperatingTimeViewModelOutput { }
+
+// MARK: - DI container
 
 extension OperatingTimeViewController {
 	struct Container {
 		let viewModel: OperatingTimeViewModel
 	}
-}
-
-extension OperatingTimeViewController: OperatingTimeViewModelOutput {
-	
 }

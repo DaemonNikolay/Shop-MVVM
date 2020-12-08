@@ -1,10 +1,3 @@
-//
-//  DataSource.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import Foundation
 
 class DataSource {
@@ -17,30 +10,31 @@ class DataSource {
 	private let dataSource: UserDefaults
 	
 	private init() {
-		self.dataSource = UserDefaults.standard
+		dataSource = UserDefaults.standard
 	}
 	
 	var currentShop: Shop?
 	
 	var shopCount: Int {
 		get {
-			let shopIds = self.getShopIds()
-			
-			return shopIds?.count ?? 0
+            shops()?.count ?? 0
 		}
 	}
 	
 	func addShop(shop: Shop) {
-		try? self.dataSource.setObject(shop, forKey: shop.id.description)
-		self.updateShopIds(id: shop.id.description)
+		let fd = try? dataSource.setObject(shop, forKey: shop.id.description)
+		updateShopIds(id: shop.id.description)
 	}
 	
 	func shops() -> Array<Shop>? {
-		guard let shopIds: Array<String> = self.getShopIds() else { return nil }
-
-		let shops: Array<Shop> = shopIds.map { shopId in
-			self.shop(id: shopId)!
-		}
+		guard let shopIds: Array<String> = getShopIds() else { return nil }
+        
+        var shops: Array<Shop> = []
+        shopIds.forEach { shopId in
+            if let shop = shop(id: shopId) {
+                shops.append(shop)
+            }
+        }
 			
 		return shops
 	}
@@ -52,27 +46,51 @@ class DataSource {
 	}
 	
 	func updateShop(shop: Shop) {
-		guard let _ = self.shop(id: shop.id.description) else { return }
+        guard let _ = self.shop(id: shop.id.description) else { return }
 		
-		try? self.dataSource.setObject(shop, forKey: shop.id.description)
+		try? dataSource.setObject(shop, forKey: shop.id.description)
 	}
+    
+    func validShopsOnExistIsNearest() -> Bool {
+        guard let shops = shops() else {
+            return true
+        }
+            
+        if let _ = shops.first(where: { $0.isNearestShop == nil }) {
+            return false
+        }
+        
+        return true
+    }
+    
+    func removeAllShops() {
+        guard let shopIds = getShopIds() else {
+            return
+        }
+        
+        shopIds.forEach { shopId in
+            dataSource.removeObject(forKey: shopId)
+        }
+        
+        dataSource.removeObject(forKey: keyShopIds)
+    }
 	
 	private func getShopIds() -> Array<String>? {
 		let userDefaults = UserDefaults.standard
-		let shopIds = userDefaults.array(forKey: self.keyShopIds) as? Array<String>
+		let shopIds = userDefaults.array(forKey: keyShopIds) as? Array<String>
 		
 		return shopIds
 	}
 	
 	private func updateShopIds(id: String) {
-		guard var shopIds = self.getShopIds() else {
+		guard var shopIds = getShopIds() else {
 			let shopIds = [id]
-			self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+			dataSource.setValue(shopIds, forKey: keyShopIds)
 			
 			return
 		}
 		
 		shopIds.append(id)
-		self.dataSource.setValue(shopIds, forKey: self.keyShopIds)
+		dataSource.setValue(shopIds, forKey: keyShopIds)
 	}
 }

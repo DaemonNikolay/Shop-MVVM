@@ -1,13 +1,23 @@
-//
-//  ShopListViewModel.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import Foundation
+import UIKit
 
-struct ShopListViewModel: ShopListViewModelInput {
+// MARK: - Protocols
+
+protocol ShopListViewModelInput {
+	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath)
+	func keyOfShopOffsetBy(_ offsetBy: Int) -> String
+}
+
+protocol ShopListViewModelOutput {
+	func rowsCount() -> Int
+	func numberOfRowsIn(_ section: Int) -> Int
+	func fillCellIn(_ indexPath: IndexPath) -> UITableViewCell
+	func titleForHeaderIn(_ section: Int) -> String?
+}
+
+// MARK: - ViewModel
+
+struct ShopListViewModel {
 	private let router: ShopListRouter
 	
 	typealias ShopData = [String: [Shop]]
@@ -15,10 +25,9 @@ struct ShopListViewModel: ShopListViewModelInput {
 	var shops: ShopData = [:]
 	
 	init(container: Container) {
-		self.router = container.router
-		self.shops = self.shopsInit()
+		router = container.router
+		shops = shopsInit()
 	}
-	
 	
 	func shopsInit() -> ShopData {
 		let dataSource = DataSource.shared
@@ -39,32 +48,54 @@ struct ShopListViewModel: ShopListViewModelInput {
 	}
 	
 	func shop(name: String, key: String) -> Shop? {
-		let shop = self.shops[key]?.first(where: { $0.name == name })
+		let shop = shops[key]?.first(where: { $0.name == name })
 		
 		return shop
 	}
 	
 	func showShopDetail(shopName: String, shopType: String) {
-		guard let shop = self.shop(name: shopName, key: shopType) else { return	}
-		
+        guard let shop = shop(name: shopName, key: shopType), let isNearestShop = shop.isNearestShop else { return	}
+
 		let dataSource = DataSource.shared
 		dataSource.currentShop = shop
 		
-		if !shop.isNearestShop {
-			self.transitionToShopDetail()
+        if !isNearestShop {
+			transitionToShopDetail()
 		} else {
-			self.transitionToShopOperatingTime()
+			transitionToShopOperatingTime()
 		}
 	}
 	
 	private func transitionToShopOperatingTime() {
-		self.router.showOperatingTime()
+		router.showOperatingTime()
 	}
 	
 	private func transitionToShopDetail() {
-		self.router.showShopDetail()
+		router.showShopDetail()
 	}
 }
+
+// MARK: - Input
+
+extension ShopListViewModel: ShopListViewModelInput {
+	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath) {
+		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
+		
+		let key = keyOfShopOffsetBy(indexPath.section)
+		
+		showShopDetail(shopName: name, shopType: key)
+	}
+	
+	func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
+		let startIndex = shops.startIndex
+		let index = shops.index(startIndex, offsetBy: offsetBy)
+		let key = shops.keys[index]
+		
+		return key
+	}
+}
+
+// MARK: - DI container
 
 extension ShopListViewModel {
 	struct Container {

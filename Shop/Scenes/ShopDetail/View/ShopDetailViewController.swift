@@ -1,13 +1,6 @@
-//
-//  ShopDetailViewController.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import UIKit
 
-class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
+class ShopDetailViewController: UIViewController {
 	
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
@@ -16,9 +9,10 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 	
 	private let cellReuseIdentifier: String = "settingCell"
 
+	// MARK: - Initialize
 	
 	init(container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		
 		super.init(nibName: nil, bundle: nil)
 	}
@@ -27,20 +21,47 @@ class ShopDetailViewController: UIViewController, ShopDetailViewModelOutput {
 		fatalError("Unable to use init with coder")
 	}
 	
+	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.settingsTable.register(UITableViewCell.self,
-									forCellReuseIdentifier: self.cellReuseIdentifier)
+		settingsTable.register(ShopDetailCell.self,
+                               forCellReuseIdentifier: cellReuseIdentifier)
 	}
-
 	
-	@IBAction func saveTap(_ sender: UIButton) {
-		self.viewModel.saveShop {
-			self.viewModel.showShopList()
-		}
+	// MARK: - Actions
+
+	@IBAction func backTap(_ sender: UIButton) {
+        viewModel.didBackTap()
 	}
 }
+
+// MARK: - Output
+
+extension ShopDetailViewController: ShopDetailViewModelOutput {
+    func fillCellBy(indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
+                                                           for: indexPath) as? ShopDetailCell else {
+            return UITableViewCell()
+        }
+        
+        let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
+        if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
+            cell.isOfficeHours = true
+        }
+        
+        cell.textLabel?.text = content
+        
+        return cell
+    }
+    
+    func rowsCount() -> Int {
+        Shop.DetailNames.allCases.count
+    }
+}
+
+// MARK: - DI container
 
 extension ShopDetailViewController {
 	struct Container {
@@ -48,39 +69,31 @@ extension ShopDetailViewController {
 	}
 }
 
-
 // MARK: - TableView
 
 extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		Shop.DetailNames.allCases.count
+        rowsCount()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = self.settingsTable.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier,
-														  for: indexPath)
-		
-		let (content, shopDetailKey) = self.viewModel.formatPropertyOfShopBy(indexPath.row)
-		
-		if let shopDetailKey = shopDetailKey {
-			if shopDetailKey == .officeHours {
-				cell.tag = 1
-			}
-		}
-		
-		cell.textLabel?.text = content
-		
+        
+        let cell = fillCellBy(indexPath: indexPath)
+        
 		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let cell = tableView.cellForRow(at: indexPath)
-		if cell?.tag == 1 {
-			self.actionOnCellTap()
-		}
+        guard let cell = tableView.cellForRow(at: indexPath) as? ShopDetailCell else {
+            return
+        }
+        
+        if cell.isOfficeHours == true {
+            actionOnCellTap()
+        }
 	}
 	
 	private func actionOnCellTap() {
-		self.viewModel.showOperatingTime()
+        viewModel.didCellTap()
 	}
 }

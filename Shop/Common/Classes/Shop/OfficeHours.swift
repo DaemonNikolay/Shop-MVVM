@@ -1,10 +1,3 @@
-//
-//  OfficeHours.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import Foundation
 import os.log
 
@@ -40,7 +33,7 @@ struct OfficeHours: Codable {
 	}
 	
 	init(opening: Float = .zero, closing: Float = .zero) {
-		self.opening = opening
+        self.opening = opening
 		self.closing = closing
 	}
 }
