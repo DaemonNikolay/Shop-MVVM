@@ -1,10 +1,21 @@
 import Foundation
+import UIKit
+
+// MARK: - Protocols
 
 protocol OperatingTimeViewModelOutput { }
 
 protocol OperatingTimeViewModelInput {
     func didLoad(completion: @escaping (_ operatingTime: OfficeHours) -> Void)
+	func extractDateFrom(_ time: Float) -> Date
+	
+	func didChangeOpeningTime(_ sender: UIDatePicker)
+	func didChangeClosingTime(_ sender: UIDatePicker)
+	func didSaveTap()
+	func backTap()
 }
+
+// MARK: - ViewModel
 
 struct OperatingTimeViewModel {
 	private let router: OperatingTimeRouter
@@ -59,7 +70,34 @@ struct OperatingTimeViewModel {
 	}
 }
 
+// MARK: - Input
+
 extension OperatingTimeViewModel: OperatingTimeViewModelInput {
+	func backTap() {
+		showShopList()
+	}
+	
+	func didSaveTap() {
+		updateCurrentShop()
+	}
+	
+	func didChangeClosingTime(_ sender: UIDatePicker) {
+		updateClosingTimeOf(sender.date)
+	}
+	
+	func didChangeOpeningTime(_ sender: UIDatePicker) {
+		updateOpeningTimeOf(sender.date)
+	}
+	
+	func extractDateFrom(_ time: Float) -> Date {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "HH.mm"
+
+		guard let date = dateFormatter.date(from: time.description) else { return Date() }
+		
+		return date
+	}
+	
     func didLoad(completion: @escaping (OfficeHours) -> Void) {
         completion(currentShopOperatingTime)
     }

@@ -7,6 +7,8 @@ class OperatingTimeViewController: UIViewController {
 	
 	private var viewModel: OperatingTimeViewModel
 	
+	// MARK: - Initialize
+	
 	init (container: Container) {
 		viewModel = container.viewModel
 		
@@ -17,47 +19,45 @@ class OperatingTimeViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
+	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		setupOutput()
+		setupController()
 	}
 	
-	private func setupOutput() {
+	private func setupController() {
 		viewModel.didLoad(completion: { [weak self] (operatingTime) in
 			self?.setupOperatingTime(operatingTime)
 		})
 	}
 	
 	private func setupOperatingTime(_ operatingTime: OfficeHours) {
-		openingTime.date = extractDateFrom(operatingTime.opening)
-		closingTime.date = extractDateFrom(operatingTime.closing)
+		openingTime.date = viewModel.extractDateFrom(operatingTime.opening)
+		closingTime.date = viewModel.extractDateFrom(operatingTime.closing)
 	}
 	
-	private func extractDateFrom(_ time: Float) -> Date {
-		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "HH.mm"
-
-		guard let date = dateFormatter.date(from: time.description) else { return Date() }
-		
-		return date
-	}
+	// MARK: - Actions
 	
 	@IBAction func openingTimeChanged(_ sender: UIDatePicker) {
-		viewModel.updateOpeningTimeOf(sender.date)
+		viewModel.didChangeOpeningTime(sender)
 	}
 	
 	@IBAction func closingTimeChanged(_ sender: UIDatePicker) {
-		viewModel.updateClosingTimeOf(sender.date)
+		viewModel.didChangeClosingTime(sender)
 	}
 	
 	@IBAction func saveTap(_ sender: UIButton) {
-		viewModel.updateCurrentShop()
+		viewModel.didSaveTap()
 	}
-    @IBAction func backTap(_ sender: Any) {
-        viewModel.showShopList()
+	
+    @IBAction func backTap(_ sender: UIButton) {
+        viewModel.backTap()
     }
 }
+
+// MARK: - Output
 
 extension OperatingTimeViewController: OperatingTimeViewModelOutput { }
 
