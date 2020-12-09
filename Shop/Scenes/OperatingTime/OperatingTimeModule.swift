@@ -5,10 +5,10 @@ struct OperatingTimeModule {
 	
 	init(transition: Transition) {
 		let router = OperatingTimeRouter()
-		let currentShop: Shop? = DataSource.shared.currentShop
 		
-		let viewModel = OperatingTimeViewModel(container: .init(router: router, currentShop: currentShop))
+		let viewModel = OperatingTimeViewModel(container: .init(router: router))
 		let view = OperatingTimeViewController(container: .init(viewModel: viewModel))
+		viewModel.setup(view: view)
 		
 		router.viewController = view
 		router.openTransition = transition

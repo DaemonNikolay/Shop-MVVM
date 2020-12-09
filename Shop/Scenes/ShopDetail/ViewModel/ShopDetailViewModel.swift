@@ -4,26 +4,31 @@ import UIKit
 // MARK: - Protocols
 
 protocol ShopDetailViewModelInput {
-    func didBackTap()
-    func didCellTap()
+	mutating func didLoad()
+	func didBackTap()
+	func fillCellBy(_ indexPath: IndexPath, identifier: String, tableView: UITableView) -> UITableViewCell
+	func rowsCount() -> Int
+	func didCellTap()
 }
 
-protocol ShopDetailViewModelOutput {
-    func rowsCount() -> Int
-    func fillCellBy(indexPath: IndexPath) -> UITableViewCell
+protocol ShopDetailViewModelOutput: class {
+	func reloadSettingsTable()
 }
 
 // MARK: - ViewModel
 
-struct ShopDetailViewModel {
+class ShopDetailViewModel {
 	private let router: ShopDetailRouter
-	private let dataSource: DataSource = DataSource.shared
+	private weak var view: ShopDetailViewModelOutput?
 	
-	let currentShop: Shop?
+	var currentShop: Shop?
 	
 	init(container: Container) {
 		router = container.router
-		currentShop = dataSource.currentShop
+	}
+	
+	func setup(view: ShopDetailViewModelOutput) {
+		self.view = view
 	}
 	
 	func formatPropertyOfShopBy(_ index: Int) -> (String, Shop.DetailNames?) {
@@ -91,11 +96,49 @@ struct ShopDetailViewModel {
 	func updateTypeOfShop(_ type: ShopType) {
 		currentShop?.type = type
 	}
+	
+	private func extractShop(completion: @escaping () -> Void) {
+		self.currentShop = DataSource.shared.currentShop
+		completion()
+	}
 }
 
 // MARK: - Input
 
 extension ShopDetailViewModel: ShopDetailViewModelInput {
+	func rowsCount() -> Int {
+		guard let _ = currentShop else {
+			return 0
+		}
+		
+		return Shop.DetailNames.allCases.count
+	}
+	
+	func didLoad() {
+		extractShop { [weak self] in
+			self?.view?.reloadSettingsTable()
+		}
+	}
+	
+	func fillCellBy(_ indexPath: IndexPath,
+					identifier: String,
+					tableView: UITableView) -> UITableViewCell {
+		
+		guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+													   for: indexPath) as? ShopDetailCell else {
+			return UITableViewCell()
+		}
+		
+		let (content, shopDetailKey) = formatPropertyOfShopBy(indexPath.row)
+		if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
+			cell.isOfficeHours = true
+		}
+		
+		cell.textLabel?.text = content
+		
+		return cell
+	}
+	
     func didBackTap() {
         showShopList()
     }

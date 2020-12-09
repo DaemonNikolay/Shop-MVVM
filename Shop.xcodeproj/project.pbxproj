@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		04363565252D47109E247692 /* Pods_Shop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */; };
 		5FCA5835257E255D00423214 /* ShopDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FCA5834257E255D00423214 /* ShopDetailCell.swift */; };
+		7306EBEE25808E4F00ECCD02 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7306EBED25808E4F00ECCD02 /* Constant.swift */; };
 		73253A9B2578E1CA004D942C /* OperatingTimeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */; };
 		73253A9E2578EBD6004D942C /* OperatingTimeRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73253A9D2578EBD6004D942C /* OperatingTimeRoute.swift */; };
 		73253AA12578EC52004D942C /* OperatingTimeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73253AA02578EC52004D942C /* OperatingTimeModule.swift */; };
@@ -50,6 +51,7 @@
 		4F22F63DED7EF5E069A5C4DE /* Pods-Shop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shop.release.xcconfig"; path = "Target Support Files/Pods-Shop/Pods-Shop.release.xcconfig"; sourceTree = "<group>"; };
 		5C2B481B9B45F90283049BF1 /* Pods_Shop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FCA5834257E255D00423214 /* ShopDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopDetailCell.swift; sourceTree = "<group>"; };
+		7306EBED25808E4F00ECCD02 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		73253A9A2578E1CA004D942C /* OperatingTimeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OperatingTimeViewController.xib; sourceTree = "<group>"; };
 		73253A9D2578EBD6004D942C /* OperatingTimeRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeRoute.swift; sourceTree = "<group>"; };
 		73253AA02578EC52004D942C /* OperatingTimeModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperatingTimeModule.swift; sourceTree = "<group>"; };
@@ -114,6 +116,14 @@
 				5FCA5834257E255D00423214 /* ShopDetailCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		7306EBEC25808E4000ECCD02 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7306EBED25808E4F00ECCD02 /* Constant.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		734698932577579C00B55191 /* Routing */ = {
@@ -309,6 +319,7 @@
 		734A166D2574DE710003B555 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7306EBEC25808E4000ECCD02 /* Constants */,
 				734698932577579C00B55191 /* Routing */,
 				735FE3F525760F8600C6E984 /* Protocols */,
 				73A02FE4257603D40038EC60 /* Extensions */,
@@ -521,6 +532,7 @@
 				734698AD257759D700B55191 /* ShopListRoute.swift in Sources */,
 				73BEA2FA2578BC1D00A42B68 /* ShopDetailModule.swift in Sources */,
 				734698B025775BB700B55191 /* ShopDetailRoute.swift in Sources */,
+				7306EBEE25808E4F00ECCD02 /* Constant.swift in Sources */,
 				73469895257757AA00B55191 /* Animator.swift in Sources */,
 				735FE3FC2576192B00C6E984 /* AutoFillDB.swift in Sources */,
 				734A165C2574C8200003B555 /* ShopDetailViewController.swift in Sources */,

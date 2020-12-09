@@ -5,7 +5,7 @@ class OperatingTimeViewController: UIViewController {
 	@IBOutlet weak var openingTime: UIDatePicker!
 	@IBOutlet weak var closingTime: UIDatePicker!
 	
-	private var viewModel: OperatingTimeViewModel
+	private var viewModel: OperatingTimeViewModelInput
 	
 	// MARK: - Initialize
 	
@@ -24,18 +24,12 @@ class OperatingTimeViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		setupController()
+		viewModel.didLoad()
 	}
 	
-	private func setupController() {
-		viewModel.didLoad(completion: { [weak self] (operatingTime) in
-			self?.setupOperatingTime(operatingTime)
-		})
-	}
-	
-	private func setupOperatingTime(_ operatingTime: OfficeHours) {
-		openingTime.date = viewModel.extractDateFrom(operatingTime.opening)
-		closingTime.date = viewModel.extractDateFrom(operatingTime.closing)
+	private func setupOperatingTime() {
+		openingTime.date = viewModel.extractDateFromOpeningTime() ?? Date()
+		closingTime.date = viewModel.extractDateFromClosingTime() ?? Date()
 	}
 	
 	// MARK: - Actions
@@ -59,7 +53,11 @@ class OperatingTimeViewController: UIViewController {
 
 // MARK: - Output
 
-extension OperatingTimeViewController: OperatingTimeViewModelOutput { }
+extension OperatingTimeViewController: OperatingTimeViewModelOutput {
+	func reloadTime() {
+		self.setupOperatingTime()
+	}
+}
 
 // MARK: - DI container
 

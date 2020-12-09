@@ -9,6 +9,7 @@ struct ShopDetailModule {
 		
 		let viewModel = ShopDetailViewModel(container: .init(router: router))
 		let view = ShopDetailViewController(container: .init(viewModel: viewModel))
+		viewModel.setup(view: view)
 		
 		router.viewController = view
 		router.openTransition = transition

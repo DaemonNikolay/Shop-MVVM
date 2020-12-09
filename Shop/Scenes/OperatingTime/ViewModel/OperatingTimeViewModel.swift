@@ -3,11 +3,15 @@ import UIKit
 
 // MARK: - Protocols
 
-protocol OperatingTimeViewModelOutput { }
+protocol OperatingTimeViewModelOutput: class {
+	func reloadTime()
+}
 
-protocol OperatingTimeViewModelInput {
-    func didLoad(completion: @escaping (_ operatingTime: OfficeHours) -> Void)
-	func extractDateFrom(_ time: Float) -> Date
+protocol OperatingTimeViewModelInput: class {
+    func didLoad()
+	func extractDateFrom(_ time: Float?) -> Date?
+	func extractDateFromOpeningTime() -> Date?
+	func extractDateFromClosingTime() -> Date?
 	
 	func didChangeOpeningTime(_ sender: UIDatePicker)
 	func didChangeClosingTime(_ sender: UIDatePicker)
@@ -17,22 +21,22 @@ protocol OperatingTimeViewModelInput {
 
 // MARK: - ViewModel
 
-struct OperatingTimeViewModel {
+class OperatingTimeViewModel {
 	private let router: OperatingTimeRouter
+	private weak var view: OperatingTimeViewModelOutput?
 	
-	var currentShopOperatingTime: OfficeHours
+	var currentShopOperatingTime: OfficeHours?
 	var currentShop: Shop?
 	let dataSource: DataSource = DataSource.shared
 	
+	// MARK: - Initialize
+	
 	init(container: Container) {
 		router = container.router
-		currentShop = container.currentShop
-		
-		if let officeHours = currentShop?.officeHours {
-			currentShopOperatingTime = officeHours
-		} else {
-			currentShopOperatingTime = OfficeHours()
-		}
+	}
+	
+	func setup(view: OperatingTimeViewModelOutput) {
+		self.view = view
 	}
 	
 	func updateOpeningTimeOf(_ date: Date) {
@@ -68,11 +72,42 @@ struct OperatingTimeViewModel {
 		
 		return "\(hour).\(minutes)"
 	}
+	
+	private func extractCurrentShop(comletion: @escaping () -> Void) {
+		currentShop = dataSource.currentShop
+		configureOfficeHours()
+		
+		comletion()
+	}
+	
+	private func configureOfficeHours() {
+		if let officeHours = currentShop?.officeHours {
+			currentShopOperatingTime = officeHours
+		} else {
+			currentShopOperatingTime = OfficeHours()
+		}
+	}
+	
+	private func formatDateOf(_ timeHours: Float?) -> Date? {
+		guard let time = timeHours, let formatTime = extractDateFrom(time) else {
+			return nil
+		}
+		
+		return formatTime
+	}
 }
 
 // MARK: - Input
 
 extension OperatingTimeViewModel: OperatingTimeViewModelInput {
+	func extractDateFromOpeningTime() -> Date? {
+		formatDateOf(self.currentShopOperatingTime?.opening)
+	}
+	
+	func extractDateFromClosingTime() -> Date? {
+		formatDateOf(self.currentShopOperatingTime?.closing)
+	}
+	
 	func backTap() {
 		showShopList()
 	}
@@ -89,17 +124,23 @@ extension OperatingTimeViewModel: OperatingTimeViewModelInput {
 		updateOpeningTimeOf(sender.date)
 	}
 	
-	func extractDateFrom(_ time: Float) -> Date {
+	func extractDateFrom(_ time: Float?) -> Date? {
+		guard let time = time else {
+			return nil
+		}
+		
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "HH.mm"
+		dateFormatter.dateFormat = Constant.DateFormat.RU.rawValue
 
 		guard let date = dateFormatter.date(from: time.description) else { return Date() }
 		
 		return date
 	}
 	
-    func didLoad(completion: @escaping (OfficeHours) -> Void) {
-        completion(currentShopOperatingTime)
+    func didLoad() {
+		extractCurrentShop { [weak self] in
+			self?.view?.reloadTime()
+		}
     }
 }
 
@@ -108,6 +149,5 @@ extension OperatingTimeViewModel: OperatingTimeViewModelInput {
 extension OperatingTimeViewModel {
 	struct Container {
 		let router: OperatingTimeRouter
-		let currentShop: Shop?
 	}
 }
