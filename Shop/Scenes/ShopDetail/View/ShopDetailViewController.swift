@@ -5,7 +5,7 @@ class ShopDetailViewController: UIViewController {
 	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
 
-	private var viewModel: ShopDetailViewModel
+	private var viewModel: ShopDetailViewModelInput
 	
 	private let cellReuseIdentifier: String = "settingCell"
 
@@ -27,7 +27,9 @@ class ShopDetailViewController: UIViewController {
 		super.viewDidLoad()
 		
 		settingsTable.register(ShopDetailCell.self,
-                               forCellReuseIdentifier: cellReuseIdentifier)
+							   forCellReuseIdentifier: cellReuseIdentifier)
+		
+		viewModel.didLoad()
 	}
 	
 	// MARK: - Actions
@@ -39,33 +41,13 @@ class ShopDetailViewController: UIViewController {
 
 // MARK: - Output
 
-extension ShopDetailViewController: ShopDetailViewModelOutput {
-    func fillCellBy(indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = settingsTable.dequeueReusableCell(withIdentifier: cellReuseIdentifier,
-                                                           for: indexPath) as? ShopDetailCell else {
-            return UITableViewCell()
-        }
-        
-        let (content, shopDetailKey) = viewModel.formatPropertyOfShopBy(indexPath.row)
-        if let shopDetailKey = shopDetailKey, shopDetailKey == .officeHours {
-            cell.isOfficeHours = true
-        }
-        
-        cell.textLabel?.text = content
-        
-        return cell
-    }
-    
-    func rowsCount() -> Int {
-        Shop.DetailNames.allCases.count
-    }
-}
+extension ShopDetailViewController: ShopDetailViewModelOutput { }
 
 // MARK: - DI container
 
 extension ShopDetailViewController {
 	struct Container {
-		let viewModel: ShopDetailViewModel
+		let viewModel: ShopDetailViewModelInput
 	}
 }
 
@@ -73,14 +55,11 @@ extension ShopDetailViewController {
 
 extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        rowsCount()
+		viewModel.rowsCount()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = fillCellBy(indexPath: indexPath)
-        
-		return cell
+		viewModel.fillCellBy(indexPath, identifier: cellReuseIdentifier, tableView: settingsTable)
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

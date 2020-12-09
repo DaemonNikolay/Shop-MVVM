@@ -4,21 +4,26 @@ import UIKit
 // MARK: - Protocols
 
 protocol ShopListViewModelInput {
+	func didLoad()
+	
 	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath)
 	func keyOfShopOffsetBy(_ offsetBy: Int) -> String
-}
-
-protocol ShopListViewModelOutput {
+	
 	func rowsCount() -> Int
 	func numberOfRowsIn(_ section: Int) -> Int
-	func fillCellIn(_ indexPath: IndexPath) -> UITableViewCell
+	func fillCellBy(_ indexPath: IndexPath, tableView: UITableView, identifier: String) -> UITableViewCell
 	func titleForHeaderIn(_ section: Int) -> String?
+}
+
+protocol ShopListViewModelOutput: class {
+	func reloadShopsTable()
 }
 
 // MARK: - ViewModel
 
-struct ShopListViewModel {
+class ShopListViewModel {
 	private let router: ShopListRouter
+	private weak var view: ShopListViewModelOutput?
 	
 	typealias ShopData = [String: [Shop]]
 	
@@ -26,15 +31,17 @@ struct ShopListViewModel {
 	
 	init(container: Container) {
 		router = container.router
-		shops = shopsInit()
 	}
 	
-	func shopsInit() -> ShopData {
+	func setup(view: ShopListViewModelOutput) {
+		self.view = view
+	}
+	
+	func shopsInit() {
 		let dataSource = DataSource.shared
-		guard let shops = dataSource.shops() else {	return [:] }
+		guard let shops = dataSource.shops() else {	return }
 		
 		var result: ShopData = [:]
-		
 		ShopType.allCases.forEach { shopType in
 			result[shopType.rawValue] = []
 		}
@@ -44,7 +51,7 @@ struct ShopListViewModel {
 			result[key]?.append(shop)
 		}
 		
-		return result
+		self.shops = result
 	}
 	
 	func shop(name: String, key: String) -> Shop? {
@@ -78,6 +85,49 @@ struct ShopListViewModel {
 // MARK: - Input
 
 extension ShopListViewModel: ShopListViewModelInput {
+	func rowsCount() -> Int {
+		shops.count
+	}
+	
+	func numberOfRowsIn(_ section: Int) -> Int {
+		let key: String = keyOfShopOffsetBy(section)
+		
+		return shops[key]?.count ?? 0
+	}
+	
+	func fillCellBy(_ indexPath: IndexPath,
+					tableView: UITableView,
+					identifier: String) -> UITableViewCell {
+		
+		let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
+		
+		let key = keyOfShopOffsetBy(indexPath.section)
+		guard let shops = shops[key] else {
+			cell.textLabel?.text = "-"
+			
+			return cell
+		}
+		
+		cell.textLabel?.text = shops[indexPath.row].name
+		
+		return cell
+	}
+	
+	func titleForHeaderIn(_ section: Int) -> String? {
+		let keysCount = shops.keys.count
+		if section < keysCount  {
+			return keyOfShopOffsetBy(section)
+		}
+		
+		return nil
+	}
+	
+	func didLoad() {
+		shopsInit()
+		
+		view?.reloadShopsTable()
+	}
+	
 	func didTapCellOf(_ tableView: UITableView, indexPath: IndexPath) {
 		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else { return }
 		

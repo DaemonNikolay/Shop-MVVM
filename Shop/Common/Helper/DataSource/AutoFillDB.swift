@@ -4,10 +4,10 @@ import Fakery
 final class AutoFillDB {
 	static func autoFillDBFrom(_ numberElementsOfOneType: UInt) {
 		let dataSource = DataSource.shared
-        
+		let validShops: Bool = dataSource.validShopsOnExistIsNearest()
+
         if dataSource.shopCount > 0 {
-            return
-            if !dataSource.validShopsOnExistIsNearest() {
+            if !validShops {
                 dataSource.removeAllShops()
             } else {
                 return

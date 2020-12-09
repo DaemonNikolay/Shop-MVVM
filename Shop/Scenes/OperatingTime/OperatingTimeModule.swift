@@ -8,6 +8,7 @@ struct OperatingTimeModule {
 		
 		let viewModel = OperatingTimeViewModel(container: .init(router: router))
 		let view = OperatingTimeViewController(container: .init(viewModel: viewModel))
+		viewModel.setup(view: view)
 		
 		router.viewController = view
 		router.openTransition = transition

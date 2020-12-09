@@ -1,6 +1,6 @@
 import Foundation
 
-class DataSource {
+final class DataSource {
 	private let keyShopIds: String = "shops"
 	
 	static var shared: DataSource = {
@@ -22,8 +22,9 @@ class DataSource {
 	}
 	
 	func addShop(shop: Shop) {
-		let fd = try? dataSource.setObject(shop, forKey: shop.id.description)
-		updateShopIds(id: shop.id.description)
+		let shopId: String = shop.id.description
+		updateShopIds(id: shopId)
+		try? dataSource.setObject(shop, forKey: shopId)
 	}
 	
 	func shops() -> Array<Shop>? {
