@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import UIKit
 
 @main
@@ -15,7 +8,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		self.beginUserStory()
+		beginUserStory()
 		
 		return true
 	}
@@ -28,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let window = UIWindow()
 		self.window = window
 		
-		self.autoFillDB()
+		autoFillDB()
 		
 		AppRouter().showShopList()
 	}

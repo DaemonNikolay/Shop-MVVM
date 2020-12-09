@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OperatingTimeViewController" customModule="Shop" customModuleProvider="target">
+            <connections>
+                <outlet property="closingTime" destination="riB-tb-uAQ" id="16K-Fm-J3m"/>
+                <outlet property="openingTime" destination="UBA-lM-pd8" id="e89-SH-U3T"/>
+                <outlet property="view" destination="iN0-l3-epB" id="NYA-dO-qvX"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjI-Is-9tY">
+                    <rect key="frame" x="20" y="247" width="374" height="549"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opening time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEh-Oo-vZC">
+                            <rect key="frame" x="8" y="8" width="358" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="UBA-lM-pd8">
+                            <rect key="frame" x="8" y="37" width="358" height="216"/>
+                            <locale key="locale" localeIdentifier="ru"/>
+                            <connections>
+                                <action selector="openingTimeChanged:" destination="-1" eventType="valueChanged" id="BnY-xz-hNc"/>
+                            </connections>
+                        </datePicker>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Closing time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OLi-WU-DBx">
+                            <rect key="frame" x="8" y="287" width="188" height="21"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="riB-tb-uAQ">
+                            <rect key="frame" x="8" y="316" width="358" height="162"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="162" id="DFa-7I-p99"/>
+                                <constraint firstAttribute="width" constant="358" id="Vyp-uq-47M"/>
+                            </constraints>
+                            <locale key="locale" localeIdentifier="ru"/>
+                            <connections>
+                                <action selector="closingTimeChanged:" destination="-1" eventType="valueChanged" id="S8H-VZ-0Uh"/>
+                            </connections>
+                        </datePicker>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="riB-tb-uAQ" firstAttribute="top" secondItem="OLi-WU-DBx" secondAttribute="bottom" constant="8" symbolic="YES" id="3Ud-tM-v2A"/>
+                        <constraint firstItem="TEh-Oo-vZC" firstAttribute="top" secondItem="gjI-Is-9tY" secondAttribute="topMargin" id="AL4-u4-EO7"/>
+                        <constraint firstItem="TEh-Oo-vZC" firstAttribute="trailing" secondItem="gjI-Is-9tY" secondAttribute="trailingMargin" id="Bvy-Hp-Wvx"/>
+                        <constraint firstItem="OLi-WU-DBx" firstAttribute="top" secondItem="UBA-lM-pd8" secondAttribute="bottom" constant="34" id="C85-KD-YHm"/>
+                        <constraint firstItem="riB-tb-uAQ" firstAttribute="leading" secondItem="OLi-WU-DBx" secondAttribute="leading" id="Dgk-Dd-9hF"/>
+                        <constraint firstItem="riB-tb-uAQ" firstAttribute="leading" secondItem="UBA-lM-pd8" secondAttribute="leading" id="NCp-H7-aiD"/>
+                        <constraint firstAttribute="width" constant="374" id="PRW-LB-6Yc"/>
+                        <constraint firstItem="TEh-Oo-vZC" firstAttribute="leading" secondItem="gjI-Is-9tY" secondAttribute="leadingMargin" id="YSG-Cc-LXF"/>
+                        <constraint firstItem="OLi-WU-DBx" firstAttribute="width" secondItem="riB-tb-uAQ" secondAttribute="width" multiplier="0.52514" id="sEb-sw-ejn"/>
+                        <constraint firstAttribute="height" constant="549" id="shF-6e-B8x"/>
+                        <constraint firstItem="UBA-lM-pd8" firstAttribute="width" secondItem="TEh-Oo-vZC" secondAttribute="width" id="xqh-lq-6Zt"/>
+                        <constraint firstItem="UBA-lM-pd8" firstAttribute="top" secondItem="TEh-Oo-vZC" secondAttribute="bottom" constant="8" id="yF9-a8-4Ls"/>
+                        <constraint firstItem="TEh-Oo-vZC" firstAttribute="leading" secondItem="UBA-lM-pd8" secondAttribute="leading" id="z87-Bz-fY4"/>
+                    </constraints>
+                </view>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xfV-CW-y29">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <items>
+                        <navigationItem title="Title" id="jUh-09-5SF">
+                            <barButtonItem key="leftBarButtonItem" style="plain" id="Hen-9Y-9zG">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="hZt-ZI-xWg">
+                                    <rect key="frame" x="20" y="7" width="92" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Back"/>
+                                    <connections>
+                                        <action selector="backTap:" destination="-1" eventType="touchUpInside" id="A3X-4a-zWq"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" style="plain" id="x3A-XR-cx9">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qOv-Tt-bZH">
+                                    <rect key="frame" x="316" y="5" width="78" height="34"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Save">
+                                        <color key="titleColor" name="AccentColor"/>
+                                        <color key="titleShadowColor" name="AccentColor"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveTap:" destination="-1" eventType="touchUpInside" id="i89-AG-dJH"/>
+                                    </connections>
+                                </button>
+                                <color key="tintColor" name="AccentColor"/>
+                            </barButtonItem>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="gjI-Is-9tY" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3G4-n3-EzC"/>
+                <constraint firstItem="xfV-CW-y29" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="LwC-t3-j8b"/>
+                <constraint firstItem="xfV-CW-y29" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="dlf-TZ-yUG"/>
+                <constraint firstItem="gjI-Is-9tY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="73.5" id="q6I-y2-t9T"/>
+                <constraint firstItem="xfV-CW-y29" firstAttribute="centerX" secondItem="gjI-Is-9tY" secondAttribute="centerX" id="xsG-IA-a5G"/>
+            </constraints>
+            <point key="canvasLocation" x="131.8840579710145" y="131.91964285714286"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

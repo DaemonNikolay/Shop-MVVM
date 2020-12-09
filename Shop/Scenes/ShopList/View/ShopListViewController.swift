@@ -1,22 +1,16 @@
-//
-//  ShopListViewController.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import UIKit
 
-class ShopListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShopListViewController: UIViewController {
 	
 	@IBOutlet weak var tableShops: UITableView!
 	
-	private var viewModel: ShopListViewModel
+	private var viewModel: ShopListViewModelInput
 	private let cellReuseIdentifier: String = "myCell"
 	
+	// MARK: - Initialize
 	
 	init (container: Container) {
-		self.viewModel = container.viewModel
+		viewModel = container.viewModel
 		super.init(nibName: nil, bundle: nil)
 	}
 	
@@ -24,71 +18,54 @@ class ShopListViewController: UIViewController, UITableViewDelegate, UITableView
 		fatalError("Unable to use init with coder")
 	}
 	
+	// MARK: - Lifecycle
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.tableShops.register(UITableViewCell.self,
-								 forCellReuseIdentifier: self.cellReuseIdentifier)
-	}
-	
-	func numberOfSections(in tableView: UITableView) -> Int {
-		self.viewModel.shops.count
-	}
-	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		let key: String = self.keyOfShopOffsetBy(section)
+		tableShops.register(UITableViewCell.self,
+                            forCellReuseIdentifier: cellReuseIdentifier)
 		
-		return self.viewModel.shops[key]?.count ?? 0
-	}
-
-	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		let keysCount = self.viewModel.shops.keys.count
-		if section < keysCount  {
-			return self.keyOfShopOffsetBy(section)
-		}
-		
-		return nil
-	}
-	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell: UITableViewCell = self.tableShops.dequeueReusableCell(withIdentifier: self.cellReuseIdentifier, for: indexPath)
-		
-		let key = self.keyOfShopOffsetBy(indexPath.section)
-		guard let shops = self.viewModel.shops[key] else {
-			cell.textLabel?.text = "-"
-			
-			return cell
-		}
-		
-		cell.textLabel?.text = shops[indexPath.row].name
-		
-		return cell
-	}
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		guard let name = tableView.cellForRow(at: indexPath)?.textLabel?.text else {
-			return
-		}
-		
-		let key = self.keyOfShopOffsetBy(indexPath.section)
-		
-		self.viewModel.showShopDetail(shopName: name, shopType: key)
-	}
-	
-	private func keyOfShopOffsetBy(_ offsetBy: Int) -> String {
-		let viewModel = self.viewModel
-		
-		let startIndex = viewModel.shops.startIndex
-		let index = viewModel.shops.index(startIndex, offsetBy: offsetBy)
-		let key = viewModel.shops.keys[index]
-		
-		return key
+		viewModel.didLoad()
 	}
 }
 
+// MARK: - Output
+
+extension ShopListViewController: ShopListViewModelOutput {
+	func reloadShopsTable() {
+		tableShops.reloadData()
+	}
+}
+
+// MARK: - DI container
 
 extension ShopListViewController {
 	struct Container {
 		let viewModel: ShopListViewModel
+	}
+}
+
+// MARK: - TableView
+
+extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
+	func numberOfSections(in tableView: UITableView) -> Int {
+		viewModel.rowsCount()
+	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		viewModel.numberOfRowsIn(section)
+	}
+
+	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+		viewModel.titleForHeaderIn(section)
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		viewModel.fillCellBy(indexPath, tableView: tableShops, identifier: cellReuseIdentifier)
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		viewModel.didTapCellOf(tableView, indexPath: indexPath)
 	}
 }

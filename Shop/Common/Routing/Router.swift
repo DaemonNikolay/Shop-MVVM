@@ -1,10 +1,3 @@
-//
-//  Router.swift
-//  Shop
-//
-//  Created by Nikulux on 02.12.2020.
-//
-
 import UIKit
 
 protocol Closable: class {
@@ -27,7 +20,7 @@ class Router<GVC>: RouterProtocol, Closable where GVC: UIViewController {
 	var openTransition: Transition?
 	
 	func isTopViewController(_ aController: AnyClass) -> Bool {
-		guard let viewController = self.viewController else { return false}
+		guard let viewController = viewController else { return false }
 		
 		if let presented = viewController.presentedViewController {
 			return presented.isKind(of: aController)
