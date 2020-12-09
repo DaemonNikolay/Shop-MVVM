@@ -26,7 +26,7 @@ struct OperatingTimeViewModel {
 	
 	init(container: Container) {
 		router = container.router
-		currentShop = dataSource.currentShop
+		currentShop = container.currentShop
 		
 		if let officeHours = currentShop?.officeHours {
 			currentShopOperatingTime = officeHours
@@ -108,5 +108,6 @@ extension OperatingTimeViewModel: OperatingTimeViewModelInput {
 extension OperatingTimeViewModel {
 	struct Container {
 		let router: OperatingTimeRouter
+		let currentShop: Shop?
 	}
 }
