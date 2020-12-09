@@ -5,13 +5,12 @@ final class AutoFillDB {
 	static func autoFillDBFrom(_ numberElementsOfOneType: UInt) {
 		let dataSource = DataSource.shared
 		let validShops: Bool = dataSource.validShopsOnExistIsNearest()
-
-        if dataSource.shopCount > 0 {
-            if !validShops {
-                dataSource.removeAllShops()
-            } else {
-                return
-            }
+		let shopCount = dataSource.shopCount
+		
+		if shopCount > 0 && validShops == true {
+			return
+		} else {
+			dataSource.removeAllShops()
 		}
 		
 		let faker = Faker(locale: "en")
