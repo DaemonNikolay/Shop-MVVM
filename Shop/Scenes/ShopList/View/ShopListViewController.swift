@@ -4,7 +4,7 @@ class ShopListViewController: UIViewController {
 	
 	@IBOutlet weak var tableShops: UITableView!
 	
-	private var viewModel: ShopListViewModel
+	private var viewModel: ShopListViewModelInput
 	private let cellReuseIdentifier: String = "myCell"
 	
 	// MARK: - Initialize
@@ -25,44 +25,16 @@ class ShopListViewController: UIViewController {
 		
 		tableShops.register(UITableViewCell.self,
                             forCellReuseIdentifier: cellReuseIdentifier)
+		
+		viewModel.didLoad()
 	}
 }
 
 // MARK: - Output
 
 extension ShopListViewController: ShopListViewModelOutput {
-	func titleForHeaderIn(_ section: Int) -> String? {
-		let keysCount = viewModel.shops.keys.count
-		if section < keysCount  {
-			return viewModel.keyOfShopOffsetBy(section)
-		}
-		
-		return nil
-	}
-	
-	func rowsCount() -> Int {
-		viewModel.shops.count
-	}
-	
-	func numberOfRowsIn(_ section: Int) -> Int {
-		let key: String = viewModel.keyOfShopOffsetBy(section)
-		
-		return viewModel.shops[key]?.count ?? 0
-	}
-	
-	func fillCellIn(_ indexPath: IndexPath) -> UITableViewCell {
-		let cell: UITableViewCell = tableShops.dequeueReusableCell(withIdentifier: cellReuseIdentifier, for: indexPath)
-		
-		let key = viewModel.keyOfShopOffsetBy(indexPath.section)
-		guard let shops = viewModel.shops[key] else {
-			cell.textLabel?.text = "-"
-			
-			return cell
-		}
-		
-		cell.textLabel?.text = shops[indexPath.row].name
-		
-		return cell
+	func reloadShopsTable() {
+		tableShops.reloadData()
 	}
 }
 
@@ -78,19 +50,19 @@ extension ShopListViewController {
 
 extension ShopListViewController: UITableViewDelegate, UITableViewDataSource {
 	func numberOfSections(in tableView: UITableView) -> Int {
-		rowsCount()
+		viewModel.rowsCount()
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		numberOfRowsIn(section)
+		viewModel.numberOfRowsIn(section)
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		titleForHeaderIn(section)
+		viewModel.titleForHeaderIn(section)
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		fillCellIn(indexPath)
+		viewModel.fillCellBy(indexPath, tableView: tableShops, identifier: cellReuseIdentifier)
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -11,9 +11,7 @@ protocol ShopDetailViewModelInput {
 	func didCellTap()
 }
 
-protocol ShopDetailViewModelOutput: class {
-	func reloadSettingsTable()
-}
+protocol ShopDetailViewModelOutput: class { }
 
 // MARK: - ViewModel
 
@@ -97,9 +95,8 @@ class ShopDetailViewModel {
 		currentShop?.type = type
 	}
 	
-	private func extractShop(completion: @escaping () -> Void) {
+	private func extractShop() {
 		self.currentShop = DataSource.shared.currentShop
-		completion()
 	}
 }
 
@@ -115,9 +112,7 @@ extension ShopDetailViewModel: ShopDetailViewModelInput {
 	}
 	
 	func didLoad() {
-		extractShop { [weak self] in
-			self?.view?.reloadSettingsTable()
-		}
+		extractShop()
 	}
 	
 	func fillCellBy(_ indexPath: IndexPath,

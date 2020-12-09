@@ -41,11 +41,7 @@ class ShopDetailViewController: UIViewController {
 
 // MARK: - Output
 
-extension ShopDetailViewController: ShopDetailViewModelOutput {
-	func reloadSettingsTable() {
-		self.settingsTable.reloadData()
-	}
-}
+extension ShopDetailViewController: ShopDetailViewModelOutput { }
 
 // MARK: - DI container
 

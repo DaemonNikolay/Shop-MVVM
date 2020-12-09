@@ -22,7 +22,9 @@ final class DataSource {
 	}
 	
 	func addShop(shop: Shop) {
-		updateShopIds(id: shop.id.description)
+		let shopId: String = shop.id.description
+		updateShopIds(id: shopId)
+		try? dataSource.setObject(shop, forKey: shopId)
 	}
 	
 	func shops() -> Array<Shop>? {
