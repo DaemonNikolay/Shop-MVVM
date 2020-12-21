@@ -1,48 +1,78 @@
-//
-//  ShopDetailViewController.swift
-//  Shop
-//
-//  Created by Nikulux on 30.11.2020.
-//
-
 import UIKit
 
-class ShopDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		0
-	}
+class ShopDetailViewController: UIViewController {
 	
-	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		UITableViewCell()
-	}
-	
-	
-	@IBOutlet weak var shopSettings: UITableView!
-	
-	@IBOutlet weak var editButton: UIButton!
-	@IBAction func editClick(_ sender: UIButton) {
-	}
-	
+	@IBOutlet weak var settingsTable: UITableView!
 	@IBOutlet weak var saveButton: UIButton!
-	@IBAction func saveClick(_ sender: UIButton) {
+
+	private var viewModel: ShopDetailViewModelInput
+	
+	private let cellReuseIdentifier: String = "settingCell"
+
+	// MARK: - Initialize
+	
+	init(container: Container) {
+		viewModel = container.viewModel
+		
+		super.init(nibName: nil, bundle: nil)
 	}
+	
+	required init?(coder: NSCoder) {
+		fatalError("Unable to use init with coder")
+	}
+	
+	// MARK: - Lifecycle
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.setupTable()
+		settingsTable.register(ShopDetailCell.self,
+							   forCellReuseIdentifier: cellReuseIdentifier)
+		
+		viewModel.didLoad()
 	}
 	
-	private func setupTable() {
-		self.shopSettings.delegate = self
-		self.shopSettings.dataSource = self
+	// MARK: - Actions
+
+	@IBAction func backTap(_ sender: UIButton) {
+        viewModel.didBackTap()
 	}
-	
-	
 }
+
+// MARK: - Output
+
+extension ShopDetailViewController: ShopDetailViewModelOutput { }
+
+// MARK: - DI container
 
 extension ShopDetailViewController {
 	struct Container {
-		let viewModel: ShopDetailViewModel
+		let viewModel: ShopDetailViewModelInput
+	}
+}
+
+// MARK: - TableView
+
+extension ShopDetailViewController: UITableViewDelegate, UITableViewDataSource {
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		viewModel.rowsCount()
+	}
+	
+	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		viewModel.fillCellBy(indexPath, identifier: cellReuseIdentifier, tableView: settingsTable)
+	}
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? ShopDetailCell else {
+            return
+        }
+        
+        if cell.isOfficeHours == true {
+            actionOnCellTap()
+        }
+	}
+	
+	private func actionOnCellTap() {
+        viewModel.didCellTap()
 	}
 }

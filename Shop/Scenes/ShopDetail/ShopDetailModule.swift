@@ -1,14 +1,14 @@
 import Foundation
 import UIKit
 
-struct ShopListModule {
+struct ShopDetailModule {
 	let view: UIViewController
 	
 	init(transition: Transition) {
-		let router = ShopListRouter()
+		let router = ShopDetailRouter()
 		
-		let viewModel = ShopListViewModel(container: .init(router: router))
-		let view = ShopListViewController(container: .init(viewModel: viewModel))
+		let viewModel = ShopDetailViewModel(container: .init(router: router))
+		let view = ShopDetailViewController(container: .init(viewModel: viewModel))
 		viewModel.setup(view: view)
 		
 		router.viewController = view
